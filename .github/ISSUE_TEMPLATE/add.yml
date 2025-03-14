@@ -15,6 +15,6 @@ body:
   - type: input
     attributes:
       label: URL
-      placeholder: 'https://mycoolsite.lol/ubg4/run3'
+      placeholder: 'https://mangos.arpa/run3.html'
     validations:
       required: true
