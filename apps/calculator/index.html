@@ -92,7 +92,20 @@
     </div>
     <script>
         function appendToDisplay(value) {
-            document.getElementById('display').value += value;
+            // Add spaces around operators
+            if (['+', '-', '*', '/', '%', '^'].includes(value)) {
+                // Check if there's already a space before or after the operator
+                let display = document.getElementById('display').value;
+                if (display && display.slice(-1) !== ' ' && !['+', '-', '*', '/', '%', '^'].includes(display.slice(-1))) {
+                    document.getElementById('display').value += ' ' + value + ' ';
+                } else if (display === '') {
+                    document.getElementById('display').value += ' ' + value + ' ';
+                } else {
+                    document.getElementById('display').value += value;
+                }
+            } else {
+                document.getElementById('display').value += value;
+            }
         }
         function clearDisplay() {
             document.getElementById('display').value = '';
@@ -113,6 +126,32 @@
                 result *= i;
             }
             return result;
+        }
+
+        // Add event listener for keyboard input
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+
+            // Handle digit keys and operators
+            if ((key >= '0' && key <= '9') || key === '.' || key === '+' || key === '-' || key === '*' || key === '/' || key === '%' || key === '^') {
+                appendToDisplay(key);
+            } 
+            // Handle special characters and functions
+            else if (key === '(') {
+                appendToDisplay('(');
+            } else if (key === ')') {
+                appendToDisplay(')');
+            } else if (key === 'Enter') {
+                calculateResult();
+            } else if (key === 'Backspace') {
+                backspace();
+            }
+        });
+
+        // Function for handling Backspace
+        function backspace() {
+            let display = document.getElementById('display').value;
+            document.getElementById('display').value = display.slice(0, -1);
         }
     </script>
 </body>
