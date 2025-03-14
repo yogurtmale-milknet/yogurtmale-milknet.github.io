@@ -1,20 +1,20 @@
 name: Add a game or app
-description: 
+description: Request to add a new game or app to the site
 title: 'Add: '
 labels: ['Request']
 
 body:
   - type: input
     attributes:
-      label: "Request"
-      placeholder:
+      label:
+      placeholder: ''
     validations:
       required: true
   
       
   - type: input
     attributes:
-      label: "Request"
-      placeholder:
+      label: ⠀
+      placeholder: ''
     validations:
       required: true
