@@ -7,14 +7,14 @@ body:
   - type: input
     attributes:
       label:
-      placeholder: ''
+      placeholder: 'Run 3'
     validations:
       required: true
   
       
   - type: input
     attributes:
-      label: ⠀
-      placeholder: ''
+      label: 
+      placeholder: 'meep.arpa/games/run3.html'
     validations:
       required: true
