@@ -1,0 +1,11 @@
+name: Edit
+description: Request to edit/fix link
+title: 'Edit: '
+labels: ['Edit']
+
+body:
+  - type: input
+    attributes:
+      label: New URL
+      description: New link for what is broken
+      placeholder: 'https://mangos.arpa/chatgpt.html'
