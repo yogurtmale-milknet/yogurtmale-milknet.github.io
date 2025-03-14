@@ -1,12 +1,12 @@
-name: Add a game or app
+name: add a game
 description: Request to add a new game or app to the site
 title: 'Add: '
-labels: ['Request']
+labels: ['add game']
 
 body:
   - type: input
     attributes:
-      label:
+      label: Name
       placeholder: 'Run 3'
     validations:
       required: true
@@ -14,7 +14,7 @@ body:
       
   - type: input
     attributes:
-      label: 
-      placeholder: 'meep.arpa/games/run3.html'
+      label: URL
+      placeholder: 'https://mycoolsite.lol/ubg4/run3'
     validations:
       required: true
