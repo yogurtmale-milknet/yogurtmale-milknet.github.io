@@ -5,154 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MilkNet | Calculator</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #000;
+            margin: 0;
+            background-color: #000; /* Dark background */
+            color: white; /* White text */
         }
         .calculator {
-            background: #111;
-            color: #fff;
+            background-color: #000; /* Dark calculator background */
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
-            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            width: 280px;
         }
         input {
             width: 100%;
-            height: 60px;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 15px;
-            background: #222;
-            color: #fff;
-            border: none;
+            height: 50px;
+            font-size: 24px;
             padding: 10px;
+            margin-bottom: 20px;
+            background-color: #000;
+            color: white;
+            border: none;
             border-radius: 8px;
+            text-align: center;
         }
         .buttons {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
         button {
             padding: 20px;
-            font-size: 1.3em;
-            font-weight: 500;
+            font-size: 18px;
             border: none;
-            background: #333;
-            color: #fff;
-            cursor: pointer;
+            background-color: #444; /* Dark buttons */
+            color: white;
             border-radius: 8px;
-            transition: background 0.3s ease;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
         }
         button:hover {
-            background: #555;
+            background-color: #555;
+        }
+        button:active {
+            background-color: #666;
+            transform: scale(0.98);
+        }
+        button:focus {
+            outline: none;
+        }
+        .button-clear {
+            background-color: #e63946;
+        }
+        .button-equal {
+            background-color: #2a9d8f;
+            grid-column: span 4; 
+        }
+        .button-function {
+            background-color: #f1faee;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <input type="text" id="display" disabled>
-        <div class="buttons">
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="appendToDisplay('(')">(</button>
-            <button onclick="appendToDisplay(')')">)</button>
-            <button onclick="appendToDisplay(' / ')">/</button>
-            <button onclick="appendToDisplay(' * ')">*</button>
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
-            <button onclick="appendToDisplay(' - ')">-</button>
-            <button onclick="appendToDisplay(' + ')">+</button>
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
-            <button onclick="appendToDisplay('%')">%</button>
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
-            <button onclick="appendToDisplay('0')">0</button>
-            <button onclick="appendToDisplay('.')">.</button>
-            <button onclick="appendToDisplay('sin(')">sin</button>
-            <button onclick="appendToDisplay('cos(')">cos</button>
-            <button onclick="appendToDisplay('tan(')">tan</button>
-            <button onclick="appendToDisplay('log(')">log</button>
-            <button onclick="appendToDisplay('√(')">√</button>
-            <button onclick="appendToDisplay('^')">x^y</button>
-            <button onclick="appendToDisplay('π')">π</button>
-            <button onclick="appendToDisplay('e')">e</button>
-            <button onclick="appendToDisplay('!')">x!</button>
-            <button onclick="calculateResult()">=</button>
-        </div>
+
+<div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+        <button class="button-clear" onclick="clearDisplay()">C</button>
+        <button onclick="deleteLast()">←</button>
+        <button class="button-function" onclick="appendToDisplay('%')">%</button>
+        <button class="button-function" onclick="appendToDisplay('/')">/</button>
+
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button class="button-function" onclick="appendToDisplay('*')">*</button>
+
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button class="button-function" onclick="appendToDisplay('-')">-</button>
+
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button class="button-function" onclick="appendToDisplay('+')">+</button>
+
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button class="button-function" onclick="appendToDisplay('**')">^</button>
+
+        <button class="button-function" onclick="appendToDisplay('sin(')">sin</button>
+        <button class="button-function" onclick="appendToDisplay('cos(')">cos</button>
+        <button class="button-function" onclick="appendToDisplay('tan(')">tan</button>
+
+        
+        <button class="button-function" onclick="appendToDisplay('(')">(</button>
+        <button class="button-function" onclick="appendToDisplay(')')">)</button>
+
+       
+        <button class="button-equal" onclick="calculate()">=</button>
     </div>
-    <script>
-        function appendToDisplay(value) {
-            // Add spaces around operators
-            if (['+', '-', '*', '/', '%', '^'].includes(value)) {
-                // Check if there's already a space before or after the operator
-                let display = document.getElementById('display').value;
-                if (display && display.slice(-1) !== ' ' && !['+', '-', '*', '/', '%', '^'].includes(display.slice(-1))) {
-                    document.getElementById('display').value += ' ' + value + ' ';
-                } else if (display === '') {
-                    document.getElementById('display').value += ' ' + value + ' ';
-                } else {
-                    document.getElementById('display').value += value;
-                }
+</div>
+
+<script>
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+
+    function deleteLast() {
+        let display = document.getElementById('display');
+        display.value = display.value.slice(0, -1);
+    }
+
+    function appendToDisplay(value) {
+        let display = document.getElementById('display');
+        display.value += value;
+    }
+
+    function calculate() {
+        let display = document.getElementById('display');
+        try {
+            display.value = eval(display.value.replace(/sin\(/g, 'Math.sin(').replace(/cos\(/g, 'Math.cos(').replace(/tan\(/g, 'Math.tan('));
+        } catch (e) {
+            display.value = 'Error';
+        }
+    }
+
+    
+    document.addEventListener('keydown', function (e) {
+        const validKeys = [
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+            '.', '/', '*', '-', '+', '=', 'Enter', 'Backspace', 'c', 
+            '(', ')', '%', '^'
+        ];
+        
+        
+        if (validKeys.includes(e.key)) {
+            if (e.key === 'Enter' || e.key === '=') {
+                calculate();
+            } else if (e.key === 'Backspace') {
+                deleteLast();
+            } else if (e.key === 'c' || e.key === 'c') {
+                clearDisplay();
             } else {
-                document.getElementById('display').value += value;
+                appendToDisplay(e.key);
             }
         }
-        function clearDisplay() {
-            document.getElementById('display').value = '';
-        }
-        function calculateResult() {
-            try {
-                let expression = document.getElementById('display').value;
-                expression = expression.replace(/factorial\((\d+)\)/g, (match, num) => factorial(parseInt(num)));
-                document.getElementById('display').value = eval(expression);
-            } catch (e) {
-                alert('Invalid Expression');
-            }
-        }
-        function factorial(n) {
-            if (n === 0 || n === 1) return 1;
-            let result = 1;
-            for (let i = 2; i <= n; i++) {
-                result *= i;
-            }
-            return result;
-        }
+    });
+</script>
 
-        // Add event listener for keyboard input
-        document.addEventListener('keydown', function(event) {
-            const key = event.key;
-
-            // Handle digit keys and operators
-            if ((key >= '0' && key <= '9') || key === '.' || key === '+' || key === '-' || key === '*' || key === '/' || key === '%' || key === '^') {
-                appendToDisplay(key);
-            } 
-            // Handle special characters and functions
-            else if (key === '(') {
-                appendToDisplay('(');
-            } else if (key === ')') {
-                appendToDisplay(')');
-            } else if (key === 'Enter') {
-                calculateResult();
-            } else if (key === 'Backspace') {
-                backspace();
-            }
-        });
-
-        // Function for handling Backspace
-        function backspace() {
-            let display = document.getElementById('display').value;
-            document.getElementById('display').value = display.slice(0, -1);
-        }
-    </script>
 </body>
 </html>
