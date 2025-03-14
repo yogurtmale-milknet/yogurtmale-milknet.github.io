@@ -1,7 +1,7 @@
-name: add a game
+name: Request
 description: Request to add a new game or app to the site
 title: 'Add: '
-labels: ['add game']
+labels: ['Request']
 
 body:
   - type: input
