@@ -12,12 +12,13 @@ FORKS = [
 ]
 CHECK_INTERVAL = 20 * 60  # 20 minutes in seconds
 BASE_DIR = os.getenv("BASE_DIR", "/tmp/clones")
-GITHUB_TOKEN = os.getenv("TOKEN")  # Use your repository's secret 'TOKEN'
+GITHUB_TOKEN = os.getenv("TOKEN")
 
 def get_latest_commit(repo):
     """Fetch the latest commit hash from the default branch of a repository."""
     url = f"https://api.github.com/repos/{repo}/commits/main"
-    response = requests.get(url)
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    response = requests.get(url, headers=headers)
     if response.status_code == 200:
         return response.json()["sha"]
     else:
@@ -28,16 +29,15 @@ def clone_repo(fork_repo, local_repo):
     """Clone the forked repository if it does not exist."""
     if not os.path.exists(local_repo):
         print(f"Cloning {fork_repo} into {local_repo}...")
-        # Use token for authentication when cloning
-        subprocess.run(
-            ["git", "clone", f"https://{GITHUB_TOKEN}@github.com/{fork_repo}.git", local_repo],
-            check=True
-        )
+        auth_url = f"https://{GITHUB_TOKEN}@github.com/{fork_repo}.git"
+        subprocess.run(["git", "clone", auth_url, local_repo], check=True)
         subprocess.run(["git", "remote", "add", "upstream", f"https://github.com/{FORKS[0]['upstream']}.git"], cwd=local_repo, check=True)
 
 def pull_latest_changes(local_repo):
     """Pull the latest changes from the upstream repository."""
     try:
+        subprocess.run(["git", "config", "user.email", "actions@github.com"], cwd=local_repo, check=True)
+        subprocess.run(["git", "config", "user.name", "github-actions"], cwd=local_repo, check=True)
         subprocess.run(["git", "fetch", "upstream"], cwd=local_repo, check=True)
         subprocess.run(["git", "merge", "upstream/main"], cwd=local_repo, check=True)
         subprocess.run(["git", "push"], cwd=local_repo, check=True)
@@ -46,10 +46,6 @@ def pull_latest_changes(local_repo):
         print(f"Error updating {local_repo}: {e}")
 
 if __name__ == "__main__":
-    if not GITHUB_TOKEN:
-        print("Error: TOKEN environment variable not set.")
-        exit(1)
-
     while True:
         for repo in FORKS:
             fork_repo = repo["fork"]
