@@ -21,7 +21,7 @@ Good ways to host MilkNet:
  / /      \ \     \  /  __/ | | (_|  __/ |
 /_/        \_\     \/ \___|_|  \___\___|_|
 
-https://vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.github.io
+vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.github.io
 
     _      _   _      _   _ _  __       
  /\| |/\  | \ | |    | | | (_)/ _|      
@@ -32,7 +32,7 @@ https://vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.
                                    __/ |
                                   |___/ 
 
-https://app.netlify.com/start/deploy?repository=https://github.com/milk-net/milk-net.github.io
+app.netlify.com/start/deploy?repository=https://github.com/milk-net/milk-net.github.io
 
   _____ _ _   _    _       _               _____        __ _       _ _         ______             
  / ____(_) | | |  | |     | |        _    |_   _|      / _(_)     (_) |       |  ____|            
