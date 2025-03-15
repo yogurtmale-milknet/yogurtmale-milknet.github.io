@@ -7,6 +7,9 @@ import requests
 FORKS = [
     {"fork": "milknetmirrors/gmusa", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/picklerick", "upstream": "milk-net/milk-net.github.io"},
+    {"fork": "milknetmirrors/precalculus", "upstream": "milk-net/milk-net.github.io"},
+    {"fork": "milknetmirrors/milknetmirrors.github.io", "upstream": "milk-net/milk-net.github.io"},
+
 ]
 CHECK_INTERVAL = 20 * 60  # 20 minutes in seconds
 BASE_DIR = os.getenv("BASE_DIR", "/tmp/clones")
