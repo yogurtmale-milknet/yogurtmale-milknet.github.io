@@ -3,15 +3,13 @@ import time
 import subprocess
 import requests
 
-# Configuration
 FORKS = [
     {"fork": "milknetmirrors/gmusa", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/picklerick", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/precalculus", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/milknetmirrors.github.io", "upstream": "milk-net/milk-net.github.io"},
-
 ]
-CHECK_INTERVAL = 20 * 60  # 20 minutes in seconds
+CHECK_INTERVAL = 20 * 60
 BASE_DIR = os.getenv("BASE_DIR", "/tmp/clones")
 
 def get_latest_commit(repo):
@@ -23,6 +21,13 @@ def get_latest_commit(repo):
     else:
         print(f"Error fetching commits for {repo}: {response.text}")
         return None
+
+def clone_repo(fork_repo, local_repo):
+    """Clone the forked repository if it does not exist."""
+    if not os.path.exists(local_repo):
+        print(f"Cloning {fork_repo} into {local_repo}...")
+        subprocess.run(["git", "clone", f"https://github.com/{fork_repo}.git", local_repo], check=True)
+        subprocess.run(["git", "remote", "add", "upstream", f"https://github.com/{FORKS[0]['upstream']}.git"], cwd=local_repo, check=True)
 
 def pull_latest_changes(local_repo):
     """Pull the latest changes from the upstream repository."""
@@ -42,6 +47,7 @@ if __name__ == "__main__":
             local_repo_path = os.path.join(BASE_DIR, fork_repo.split("/")[1])
             
             print(f"Checking updates for {fork_repo}...")
+            clone_repo(fork_repo, local_repo_path)
             upstream_commit = get_latest_commit(upstream_repo)
             fork_commit = get_latest_commit(fork_repo)
             
