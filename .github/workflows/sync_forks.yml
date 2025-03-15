@@ -3,7 +3,7 @@ name: Sync Forks
 on:
   schedule:
     - cron: '0 */6 * * *'  # Runs every 6 hours
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -11,10 +11,10 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -29,6 +29,6 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       - name: Run sync script
-        run: python sync_forks.py
         env:
           TOKEN: ${{ secrets.TOKEN }}
+        run: python sync_forks.py
