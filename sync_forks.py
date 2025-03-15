@@ -3,14 +3,16 @@ import time
 import subprocess
 import requests
 
+# Configuration
 FORKS = [
     {"fork": "milknetmirrors/gmusa", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/picklerick", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/precalculus", "upstream": "milk-net/milk-net.github.io"},
     {"fork": "milknetmirrors/milknetmirrors.github.io", "upstream": "milk-net/milk-net.github.io"},
 ]
-CHECK_INTERVAL = 20 * 60
+CHECK_INTERVAL = 20 * 60  # 20 minutes in seconds
 BASE_DIR = os.getenv("BASE_DIR", "/tmp/clones")
+GITHUB_TOKEN = os.getenv("TOKEN")  # Use your repository's secret 'TOKEN'
 
 def get_latest_commit(repo):
     """Fetch the latest commit hash from the default branch of a repository."""
@@ -26,7 +28,11 @@ def clone_repo(fork_repo, local_repo):
     """Clone the forked repository if it does not exist."""
     if not os.path.exists(local_repo):
         print(f"Cloning {fork_repo} into {local_repo}...")
-        subprocess.run(["git", "clone", f"https://github.com/{fork_repo}.git", local_repo], check=True)
+        # Use token for authentication when cloning
+        subprocess.run(
+            ["git", "clone", f"https://{GITHUB_TOKEN}@github.com/{fork_repo}.git", local_repo],
+            check=True
+        )
         subprocess.run(["git", "remote", "add", "upstream", f"https://github.com/{FORKS[0]['upstream']}.git"], cwd=local_repo, check=True)
 
 def pull_latest_changes(local_repo):
@@ -40,6 +46,10 @@ def pull_latest_changes(local_repo):
         print(f"Error updating {local_repo}: {e}")
 
 if __name__ == "__main__":
+    if not GITHUB_TOKEN:
+        print("Error: TOKEN environment variable not set.")
+        exit(1)
+
     while True:
         for repo in FORKS:
             fork_repo = repo["fork"]
