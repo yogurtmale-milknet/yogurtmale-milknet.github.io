@@ -14,11 +14,29 @@
             text-align: center;
         }
     </style>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let savedLink = localStorage.getItem("savedLink");
+            
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "`") {
+                    if (!savedLink) {
+                        savedLink = prompt("Panic key will open:");
+                        if (savedLink) {
+                            localStorage.setItem("savedLink", savedLink);
+                        }
+                    } else {
+                        window.open(savedLink, "_blank");
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
      <h1 class="center-text">MilkNet</h1>
-     <p class="center-text">Paradise for bored students. What would you like to do?</p>
+     <p class="center-text">Paradise for bored students. What would you like to do? (Press ` to escape)</p>
         
      <div class="center-text">
      <a href="/games">Games</a> • <a href="/apps">Apps</a> • <a href="/links.txt">Links</a> • <a href="/form">Requests</a> • <a href="https://thismailboxismine.andthistriagonalsign.22web.org/gba">Retro Games</a>
