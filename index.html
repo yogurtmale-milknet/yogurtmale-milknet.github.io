@@ -19,9 +19,9 @@
             let savedLink = localStorage.getItem("savedLink");
             
             document.addEventListener("keydown", function(event) {
-                if (event.key === "`") {
+                if (event.key === ",") {
                     if (!savedLink) {
-                        savedLink = prompt("Panic key will open:");
+                        savedLink = prompt("Escape to: https://YOURLINK.tld");
                         if (savedLink) {
                             localStorage.setItem("savedLink", savedLink);
                         }
@@ -36,7 +36,7 @@
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
      <h1 class="center-text">MilkNet</h1>
-     <p class="center-text">Paradise for bored students. What would you like to do? (Press ` to escape)</p>
+     <p class="center-text">Paradise for bored students. What would you like to do? (Press , to escape)</p>
         
      <div class="center-text">
      <a href="/games">Games</a> • <a href="/apps">Apps</a> • <a href="/links.txt">Links</a> • <a href="/form">Requests</a> • <a href="https://thismailboxismine.andthistriagonalsign.22web.org/gba">Retro Games</a>
