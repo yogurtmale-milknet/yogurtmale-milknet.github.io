@@ -5,12 +5,11 @@
 | |  | | | |   <| |\  |  __/ |_ 
 |_|  |_|_|_|_|\_\_| \_|\___|\__|
 
-Your mirrors could be on this list. Open an issue and I'll add your alt links.
+Your mirrors could be on this list. Not exactly a lot at the moment, so open an issue or use the form and I'll add your links.
 -----------------------------------------------------------------------------
 milk.servemp3.com
-milk.fsky.io
-milk.everypizza.im
 get.milknet.ct.ws
+account.frontierbroadband.66ghz.com
 -----------------------------------------------------------------------------
 Good ways to host MilkNet:
      ____      __      __               _ 
@@ -20,7 +19,7 @@ Good ways to host MilkNet:
  / /      \ \     \  /  __/ | | (_|  __/ |
 /_/        \_\     \/ \___|_|  \___\___|_|
 
-https://vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.github.io
+vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.github.io
 
     _      _   _      _   _ _  __       
  /\| |/\  | \ | |    | | | (_)/ _|      
@@ -31,7 +30,7 @@ https://vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.
                                    __/ |
                                   |___/ 
 
-https://app.netlify.com/start/deploy?repository=https://github.com/milk-net/milk-net.github.io
+app.netlify.com/start/deploy?repository=https://github.com/milk-net/milk-net.github.io
 
   _____ _ _   _    _       _               _____        __ _       _ _         ______             
  / ____(_) | | |  | |     | |        _    |_   _|      / _(_)     (_) |       |  ____|            
@@ -42,5 +41,5 @@ https://app.netlify.com/start/deploy?repository=https://github.com/milk-net/milk
                                                                           __/ |                   
                                                                          |___/                                        
 
-https://infinityfree.com
+infinityfree.com
 Unlimited subdomains (34 domains available). Point to whatever your GitHub Pages address is (CNAME)
