@@ -5,12 +5,12 @@
 | |  | | | |   <| |\  |  __/ |_ 
 |_|  |_|_|_|_|\_\_| \_|\___|\__|
 
-Your mirrors could be on this list. Open an issue and I'll add your alt links.
+Your mirrors could be on this list. Open an issue or use the form and I'll add your links.
 -----------------------------------------------------------------------------
 milk.servemp3.com
-milk.fsky.io
-milk.everypizza.im
 get.milknet.ct.ws
+chocolate.milk.infy.uk
+account.frontierbroadband.66ghz.com
 -----------------------------------------------------------------------------
 Good ways to host MilkNet:
      ____      __      __               _ 
