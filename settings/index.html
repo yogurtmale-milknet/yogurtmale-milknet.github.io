@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MilkNet</title>
+<link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
+<style>body{max-width:1000px;margin:auto;background-color:black;color:white;font-family:Arial;}a{color:#05d5ff}</style>
+<style>
+        img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+        .center-text {
+            text-align: center;
+        }
+    </style>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let savedLink = localStorage.getItem("savedLink");
+            
+            document.addEventListener("keydown", function(event) {
+                if (event.key === ",") {
+                    if (!savedLink) {
+                        savedLink = prompt("Escape to: https://YOURLINK.tld");
+                        if (savedLink) {
+                            localStorage.setItem("savedLink", savedLink);
+                        }
+                    } else {
+                        window.open(savedLink, "_blank");
+                    }
+                }
+            });
+        });
+    </script>
+<script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '.') {
+                // Change title
+                document.title = "Student and Parent Sign In";
+
+                // Change favicon
+                var link = document.querySelector("link[rel~='icon']");
+                if (!link) {
+                    link = document.createElement('link');
+                    link.rel = 'icon';
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+                link.href = '/assets/img/new_favicon.ico';
+            }
+        });
+    </script>
+</head>
+<body>
+     <img src="/assets/img/milk_optimized.png" class="center">
+     <h1 class="center-text">MilkNet</h1>
+     <p class="center-text">Settings & Tools (these work on all games and pages)</p>
+        
+     <div class="center-text">
+     <p>. - Cloak key (customizable later)</p> • <p>, - Panic key (Opens link of your choice)</p>
+     </div>
+</body>
+</html>
+</head>
