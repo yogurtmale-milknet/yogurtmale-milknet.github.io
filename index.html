@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <title>MilkNet</title>
+<link id="original-favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
+<link id="new-favicon" rel="icon" href="/assets/img/new_favicon.ico" type="image/x-icon" style="display:none;">
 <link rel="icon" type="image/png" href="/assets/img/milk.png"/>
 <style>body{max-width:1000px;margin:auto;background-color:black;color:white;font-family:Arial;}a{color:#05d5ff}</style>
 <style>
@@ -30,6 +32,24 @@
                     }
                 }
             });
+        });
+    </script>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '.') {
+                // Change title
+                document.title = "Student and Parent Sign In";
+
+                // Change favicon
+                var originalFavicon = document.getElementById('original-favicon');
+                var newFavicon = document.getElementById('new-favicon');
+                
+                if (originalFavicon && newFavicon) {
+                    originalFavicon.remove();
+                    newFavicon.setAttribute('rel', 'icon');
+                    newFavicon.style.display = 'block';
+                }
+            }
         });
     </script>
 </head>
