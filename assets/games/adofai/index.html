@@ -17,6 +17,23 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('keydown', function(event) {
+        if (event.key === '.') {
+            // Change title
+            document.title = "Student and Parent Sign In";
+
+            // Change favicon
+            var link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.getElementsByTagName('head')[0].appendChild(link);
+            }
+            link.href = '/assets/img/new_favicon.ico';
+        }
+    });
+</script>
 
 <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads" frameborder="0" allowfullscreen="" src="/tylerpalko/adanceoffireandice" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
 </iframe>

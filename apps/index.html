@@ -32,6 +32,21 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '.') {
+                document.title = "Student and Parent Sign In";
+
+                var link = document.querySelector("link[rel~='icon']");
+                if (!link) {
+                    link = document.createElement('link');
+                    link.rel = 'icon';
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+                link.href = '/assets/img/new_favicon.ico';
+            }
+        });
+    </script>
 </head>
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
