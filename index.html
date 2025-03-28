@@ -34,24 +34,23 @@
             });
         });
     </script>
-    <script>
-        document.addEventListener('keydown', function(event) {
-            if (event.key === '.') {
-                // Change title
-                document.title = "Student and Parent Sign In";
+<script>
+    document.addEventListener('keydown', function(event) {
+        if (event.key === '.') {
+            // Change title
+            document.title = "Student and Parent Sign In";
 
-                // Change favicon
-                var originalFavicon = document.getElementById('original-favicon');
-                var newFavicon = document.getElementById('new-favicon');
-                
-                if (originalFavicon && newFavicon) {
-                    originalFavicon.remove();
-                    newFavicon.setAttribute('rel', 'icon');
-                    newFavicon.style.display = 'block';
-                }
-            }
-        });
-    </script>
+            // Change favicon
+            var favicon = document.getElementById('favicon');
+            var newFavicon = document.createElement('link');
+            newFavicon.id = 'favicon';
+            newFavicon.rel = 'icon';
+            newFavicon.href = 'new_favicon.ico';
+            
+            favicon.parentNode.replaceChild(newFavicon, favicon);
+        }
+    });
+</script>
 </head>
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
