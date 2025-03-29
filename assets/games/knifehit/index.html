@@ -1,4 +1,6 @@
 <title>￰Knife Hit</title>
+<link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let savedLink = localStorage.getItem("savedLink");
@@ -15,6 +17,21 @@
                 }
             }
         });
+    });
+</script>
+<script>
+    document.addEventListener('keydown', function(event) {
+        if (event.key === '.') {
+            document.title = "Student and Parent Sign In";
+
+            var link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.getElementsByTagName('head')[0].appendChild(link);
+            }
+            link.href = '/assets/img/new_favicon.ico';
+        }
     });
 </script>
 

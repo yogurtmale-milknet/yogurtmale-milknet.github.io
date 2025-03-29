@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>MilkNet</title>
-<link rel="icon" type="image/png" href="/assets/img/milk.png"/>
+<link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
 <style>body{max-width:1000px;margin:auto;background-color:black;color:white;font-family:Arial;}a{color:#05d5ff}</style>
 <style>
         img {
@@ -32,14 +32,31 @@
             });
         });
     </script>
+<script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '.') {
+                // Change title
+                document.title = "Student and Parent Sign In";
+
+                // Change favicon
+                var link = document.querySelector("link[rel~='icon']");
+                if (!link) {
+                    link = document.createElement('link');
+                    link.rel = 'icon';
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+                link.href = '/assets/img/new_favicon.ico';
+            }
+        });
+    </script>
 </head>
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
      <h1 class="center-text">MilkNet</h1>
-     <p class="center-text">Paradise for bored students. What would you like to do? (Press , to escape)</p>
+     <p class="center-text">Paradise for bored students. What would you like to do?</p>
         
      <div class="center-text">
-     <a href="/games">Games</a> • <a href="/apps">Apps</a> • <a href="/links.txt">Links</a> • <a href="/form">Requests</a> • <a href="/gba">Retro Games</a>
+     <a href="/games">Games</a> • <a href="/apps">Apps</a> • <a href="/links.txt">Links</a> • <a href="/form">Requests</a> • <a href="/gba">Retro Games</a> • <a href="/settings">Settings</a>
      </div>
 </body>
 </html>
