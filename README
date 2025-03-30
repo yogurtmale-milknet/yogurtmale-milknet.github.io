@@ -5,33 +5,10 @@
 | |  | | | |   <| |\  |  __/ |_ 
 |_|  |_|_|_|_|\_\_| \_|\___|\__|
 
-Open an issue or use the form and I'll add your links.
 -----------------------------------------------------------------------------
 milk.servemp3.com
 get.milknet.ct.ws
 account.frontierbroadband.66ghz.com
-milk-net-github-io.vercel.app
 -----------------------------------------------------------------------------
-Good ways to host MilkNet:
-     ____      __      __               _ 
-    / /\ \     \ \    / /              | |
-   / /  \ \     \ \  / /__ _ __ ___ ___| |
-  / /    \ \     \ \/ / _ \ '__/ __/ _ \ |
- / /      \ \     \  /  __/ | | (_|  __/ |
-/_/        \_\     \/ \___|_|  \___\___|_|
 
-vercel.com/new/clone?repositoryurl=https://github.com/milk-net/milk-net.github.io
-
-    _      _   _      _   _ _  __       
- /\| |/\  | \ | |    | | | (_)/ _|      
- \ ` ' /  |  \| | ___| |_| |_| |_ _   _ 
-|_     _| | . ` |/ _ \ __| | |  _| | | |
- / , . \  | |\  |  __/ |_| | | | | |_| |
- \/|_|\/  |_| \_|\___|\__|_|_|_|  \__, |
-                                   __/ |
-                                  |___/ 
-
-app.netlify.com/start/deploy?repository=https://github.com/milk-net/milk-net.github.io
-
-
-MilkNet CANNOT be hosted on GitHub Pages.
+Currently MilkNet cannot be deployed since most of the assets are hosted on separate repositories. If you need another link set up, let me know.
