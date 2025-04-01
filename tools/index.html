@@ -48,12 +48,11 @@
                 d: { title: "Desmos | Scientific Calculator", icon: "/assets/img/desmos.ico" },
                 cmg: { title: "Cool Math Games - Free Online Games for Learning and Fun", icon: "/assets/img/coolmathgames.ico" },
                 i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" },
-
             };
             
             if (options[choice]) {
                 document.title = options[choice].title;
-                changeFavicon(`/assets/img/${options[choice].ico}`);
+                changeFavicon(options[choice].icon);
             }
         }
     });
@@ -66,6 +65,7 @@
         document.getElementsByTagName("head")[0].appendChild(link);
     }
 </script>
+
 </head>
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
