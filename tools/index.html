@@ -33,22 +33,34 @@
         });
     </script>
 <script>
-        document.addEventListener('keydown', function(event) {
-            if (event.key === '.') {
-                // Change title
-                document.title = "Student and Parent Sign In";
-
-                // Change favicon
-                var link = document.querySelector("link[rel~='icon']");
-                if (!link) {
-                    link = document.createElement('link');
-                    link.rel = 'icon';
-                    document.getElementsByTagName('head')[0].appendChild(link);
-                }
-                link.href = '/assets/img/new_favicon.ico';
+    document.addEventListener("keydown", function (event) {
+        if (event.key === ".") {
+            let choice = prompt("CLOAK OPTIONS: Google Drive (enter g), Google Classroom (enter gc), Clever (enter c), PowerSchool (enter p), Khan Academy (enter k), Desmos (enter d)");
+            
+            const options = {
+                g: { title: "My Drive - Google Drive", icon: "/assets/img/drive.ico" },
+                gc: { title: "Google Classroom", icon: "/assets/img/classroom.ico" },
+                c: { title: "Clever | Portal", icon: "/assets/img/clever.ico" },
+                p: { title: "PowerSchool", icon: "/assets/img/powerschool.ico" },
+                k: { title: "Khan Academy", icon: "/assets/img/khan.ico" },
+                d: { title: "Desmos | Scientific Calculator", icon: "/assets/img/desmos.ico" }
+            };
+            
+            if (options[choice]) {
+                document.title = options[choice].title;
+                changeFavicon(`/assets/img/${options[choice].icon}`);
             }
-        });
-    </script>
+        }
+    });
+
+    function changeFavicon(src) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = "image/x-icon";
+        link.rel = "shortcut icon";
+        link.href = src;
+        document.getElementsByTagName("head")[0].appendChild(link);
+    }
+</script>
 </head>
 <body>
      <img src="/assets/img/milk_optimized.png" class="center">
@@ -56,7 +68,7 @@
      <p class="center-text">Settings & Tools (these work on all games and pages)</p>
         
      <div class="center-text">
-     <p>. - Cloak key (customizable later)</p> • <p>, - Panic key (Opens link of your choice)</p>
+     <p>. - Cloak key</p> • <p>, - Panic key (Opens link of your choice)</p>
      </div>
 </body>
 </html>
