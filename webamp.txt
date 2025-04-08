@@ -1,0 +1,11 @@
+ __  __ _ _ _    _   _      _   
+|  \/  (_) | |  | \ | |    | |  
+| \  / |_| | | _|  \| | ___| |_ 
+| |\/| | | | |/ / . ` |/ _ \ __|
+| |  | | | |   <| |\  |  __/ |_ 
+|_|  |_|_|_|_|\_\_| \_|\___|\__|
+
+WebAmp is a port of WinAmp (en.wikipedia.org/wiki/Winamp) for use on the web. Upload files or folders and watch the magic happen. MP3, OGG, FLAC, whatever.
+Are you a dumbass who only listens to sped up and slowed music on Spotify and you still don't understand what this is?
+Download music do play thing
+/music on whatever link you're on
