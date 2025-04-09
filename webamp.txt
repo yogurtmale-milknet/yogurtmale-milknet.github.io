@@ -5,7 +5,7 @@
 | |  | | | |   <| |\  |  __/ |_ 
 |_|  |_|_|_|_|\_\_| \_|\___|\__|
 
-Webamp is a port of Winamp (en.wikipedia.org/wiki/Winamp) for use on the web. Upload files or folders and watch the magic happen. MP3, OGG, FLAC, whatever.
+Webamp is a port of Winamp 2 (en.wikipedia.org/wiki/Winamp#Winamp_2) for use on the web. Upload files or folders and watch the magic happen. MP3, OGG, FLAC, whatever.
 Are you a dumbass who only listens to sped up and slowed music on Spotify and you still don't understand what this is?
 Download music do play thing
 /music on whatever link you're on
