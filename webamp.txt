@@ -5,10 +5,8 @@
 | |  | | | |   <| |\  |  __/ |_ 
 |_|  |_|_|_|_|\_\_| \_|\___|\__|
 
-Webamp is a port of Winamp 2 (en.wikipedia.org/wiki/Winamp#Winamp_2) for use on the web. Upload files or folders and watch the magic happen. MP3, OGG, FLAC, whatever.
+Webamp is a port of Winamp 2 (en.wikipedia.org/wiki/Winamp#Winamp_2) for use on the web. Upload files or folders and watch the magic happen. MP3, OGG, FLAC, whatever. 
 
-Are you a dumbass who only listens to sped up and slowed music on Spotify and you still don't understand what this is?
-Download music do play thing
 /music on whatever link you're on
 
 Good tools for actually getting music are SquidWTF (squid.wtf) and Lucida (lucida.to). We don't actually provide any files, this is just a player.
@@ -16,8 +14,7 @@ Good tools for actually getting music are SquidWTF (squid.wtf) and Lucida (lucid
 Also you can get skins here: 
 skins.webamp.org
 winampheritage.com/skins
-qmmp.ylsoftware.com/files/skins/winamp-skins
 winampskins.info
 winaero.com/category/file-archive/download-winamp-skins
-
-Some are at github.com/milk-net/music/blob/main/skins/
+pling.com/browse?cat=129
+github.com/milk-net/music/blob/main/skins
