@@ -16,3 +16,8 @@ Good tools for actually getting music are SquidWTF (squid.wtf) and Lucida (lucid
 Also you can get skins here: 
 skins.webamp.org
 winampheritage.com/skins
+qmmp.ylsoftware.com/files/skins/winamp-skins
+winampskins.info
+winaero.com/category/file-archive/download-winamp-skins
+
+Some are at github.com/milk-net/music/blob/main/skins/
