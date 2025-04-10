@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MilkNet | Library</title>
+  <link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let savedLink = localStorage.getItem("savedLink");
+        
+        document.addEventListener("keydown", function(event) {
+            if (event.key === ",") {
+                if (!savedLink) {
+                    savedLink = prompt("Escape to: https://YOURLINK.tld");
+                    if (savedLink) {
+                        localStorage.setItem("savedLink", savedLink);
+                    }
+                } else {
+                    window.open(savedLink, "_blank");
+                }
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("keydown", function (event) {
+        if (event.key === ".") {
+            let choice = prompt("CLOAK OPTIONS: Google Drive (enter g), Google Classroom (enter gc), Google Docs (enter gd), Clever (enter c), PowerSchool (enter p), Khan Academy (enter k), Desmos (enter d), Schoology (enter s), Cool Math Games (enter cmg)");
+            
+            const options = {
+                g: { title: "My Drive - Google Drive", icon: "/assets/img/drive.ico" },
+                gc: { title: "Google Classroom", icon: "/assets/img/classroom.ico" },
+                c: { title: "Clever | Portal", icon: "/assets/img/clever.ico" },
+                p: { title: "Student and Parent Sign In", icon: "/assets/img/powerschool.ico" },
+                k: { title: "Khan Academy", icon: "/assets/img/khan.ico" },
+                gd: { title: "Google Docs", icon: "/assets/img/docs.ico" },
+                s: { title: "Schoology", icon: "/assets/img/schoology.ico" },
+                d: { title: "Desmos | Scientific Calculator", icon: "/assets/img/desmos.ico" },
+                cmg: { title: "Cool Math Games - Free Online Games for Learning and Fun", icon: "/assets/img/coolmathgames.ico" },
+                i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" },
+            };
+            
+            if (options[choice]) {
+                document.title = options[choice].title;
+                changeFavicon(options[choice].icon);
+            }
+        }
+    });
+
+    function changeFavicon(src) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = "image/x-icon";
+        link.rel = "shortcut icon";
+        link.href = src;
+        document.getElementsByTagName("head")[0].appendChild(link);
+    }
+</script>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #000;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .main {
+      display: flex;
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    .file-list {
+      width: 200px;
+      background-color: #068148;
+      overflow-y: auto;
+      padding: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .file-list.hidden {
+      transform: translateX(-100%);
+    }
+
+    .file-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      background-color: #068148;
+      border: none;
+      color: #fff;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .file-button:hover {
+      background-color: #046c3d;
+    }
+
+    .text-display {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #000;
+      border-left: 2px solid #333;
+    }
+
+    .text-display h1, .text-display h2, .text-display h3 {
+      color: #00aced;
+    }
+
+    .text-display pre, .text-display code {
+      background-color: #222;
+      padding: 5px;
+      display: block;
+      overflow-x: auto;
+    }
+
+    .divider {
+      background-color: #333;
+      cursor: ew-resize;
+      width: 2px;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+  </div>
+  <div class="main">
+    <div class="file-list hidden" id="fileList">
+      <button class="file-button" onclick="loadText('https://voxel.fsky.io/read/1984.md')">George Orwell - 1984</button>
+      <button class="file-button" onclick="loadText('/library/animal-farm.txt')">George Orwell - Animal Farm</button>
+      <!-- Add more buttons here for additional text files -->
+    </div>
+    <div class="divider" id="divider" onmousedown="startResize(event)"></div>
+    <div class="text-display" id="textDisplay">
+      <p>Select a file to read.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    let isResizing = false;
+    let lastDownX = 0;
+
+    // Define the toggleMenu function
+    function toggleMenu() {
+      const fileList = document.getElementById('fileList');
+      fileList.classList.toggle('hidden');
+    }
+
+    async function loadText(fileUrl) {
+      const display = document.getElementById('textDisplay');
+      display.innerHTML = 'Loading...';
+
+      // First try fetching the file directly
+      try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) throw new Error('Failed to load text.');
+        const text = await response.text();
+        console.log('Fetched text:', text.slice(0, 500)); // Debug: show first 500 chars
+        const html = marked.parse(text);
+        display.innerHTML = html;
+
+        // Hide the menu after loading
+        document.getElementById('fileList').classList.add('hidden');
+      } catch (error) {
+        console.error('Fetch error:', error);
+
+        // If it fails (likely due to CORS), use the CORS proxy
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const proxyRequestUrl = proxyUrl + fileUrl;
+        try {
+          const response = await fetch(proxyRequestUrl);
+          if (!response.ok) throw new Error('Failed to load text via proxy.');
+          const text = await response.text();
+          console.log('Fetched text via proxy:', text.slice(0, 500)); // Debug: show first 500 chars
+          const html = marked.parse(text);
+          display.innerHTML = html;
+
+          // Hide the menu after loading
+          document.getElementById('fileList').classList.add('hidden');
+        } catch (proxyError) {
+          console.error('Proxy fetch error:', proxyError);
+          display.textContent = 'Error loading file: ' + proxyError.message;
+        }
+      }
+    }
+
+    function startResize(e) {
+      isResizing = true;
+      lastDownX = e.clientX;
+
+      window.addEventListener('mousemove', handleResize);
+      window.addEventListener('mouseup', stopResize);
+    }
+
+    function handleResize(e) {
+      if (!isResizing) return;
+
+      const offsetRight = document.body.offsetWidth - e.clientX;
+      const newWidth = e.clientX;
+
+      if (newWidth > 100 && newWidth < window.innerWidth - 100) {
+        document.querySelector('.file-list').style.width = `${newWidth}px`;
+        document.querySelector('.text-display').style.width = `${window.innerWidth - newWidth - 10}px`;
+      }
+    }
+
+    function stopResize() {
+      isResizing = false;
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', stopResize);
+    }
+  </script>
+</body>
+</html>
