@@ -3,66 +3,30 @@
 <head>
   <title>MilkNet</title>
   <link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: black;
-      color: white;
-      font-family: Arial;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let savedLink = localStorage.getItem("savedLink");
 
-    a {
-      color: #05d5ff;
-    }
-
-    img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .center-text {
-      text-align: center;
-    }
-
-    footer {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px;
-      margin-top: auto; /* Makes the footer stick to the bottom */
-    }
-  </style>
-         <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let savedLink = localStorage.getItem("savedLink");
-            
-            document.addEventListener("keydown", function(event) {
-                if (event.key === ",") {
-                    if (!savedLink) {
-                        savedLink = prompt("Escape to: https://YOURLINK.tld");
-                        if (savedLink) {
-                            localStorage.setItem("savedLink", savedLink);
-                        }
-                    } else {
-                        window.open(savedLink, "_blank");
+        document.addEventListener("keydown", function(event) {
+            if (event.key === ",") {
+                if (!savedLink) {
+                    savedLink = prompt("Escape to: https://YOURLINK.tld");
+                    if (savedLink) {
+                        localStorage.setItem("savedLink", savedLink);
                     }
+                } else {
+                    window.open(savedLink, "_blank");
                 }
-            });
+            }
         });
-    </script>
-<script>
+    });
+  </script>
+  <script>
     document.addEventListener("keydown", function (event) {
         if (event.key === ".") {
             let choice = prompt("CLOAK OPTIONS: Google Drive (enter g), Google Classroom (enter gc), Google Docs (enter gd), Clever (enter c), PowerSchool (enter p), Khan Academy (enter k), Desmos (enter d), Schoology (enter s), Cool Math Games (enter cmg)");
-            
+
             const options = {
                 g: { title: "My Drive - Google Drive", icon: "/assets/img/drive.ico" },
                 gc: { title: "Google Classroom", icon: "/assets/img/classroom.ico" },
@@ -75,7 +39,7 @@
                 cmg: { title: "Cool Math Games - Free Online Games for Learning and Fun", icon: "/assets/img/coolmathgames.ico" },
                 i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" },
             };
-            
+
             if (options[choice]) {
                 document.title = options[choice].title;
                 changeFavicon(options[choice].icon);
@@ -90,13 +54,13 @@
         link.href = src;
         document.getElementsByTagName("head")[0].appendChild(link);
     }
-</script>
+  </script>
 </head>
 <body>
   <img src="/assets/img/milk_optimized.png" class="center">
   <h1 class="center-text">MilkNet</h1>
   <p class="center-text">Paradise for bored students. What would you like to do?</p>
-      
+
   <div class="center-text">
     <a href="/games">Games</a> • 
     <a href="/apps">Apps</a> • 
