@@ -3,7 +3,7 @@
     <head>
         <title>Teletext Viewer</title>
         <style type="text/css">
-        body { background: #444; color:#222; font-family:sans-serif; margin:0px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        body { background: #000; color:#222; font-family:sans-serif; margin:0px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
         #viewer { height:100vh; height:calc(var(--vh, 1vh)*100); width:100vw; display:flex; flex-direction: column; }
         H1 { margin: 0em; font-size:1.5em; }
         a, span { color:#bbb; text-decoration: none; }
@@ -25,8 +25,8 @@
         <script type="text/javascript" src="settings.js"></script>
         <script type="text/javascript" src="tv.js"></script>
         <script type="text/javascript" src="remote.js"></script>
-        <script type="text/javascript" src="../teletext-resources/renderer.js"></script>
-        <script type="text/javascript" src="../teletext-resources/teletext.js"></script>
+        <script type="text/javascript" src="teletext-resources/renderer.js"></script>
+        <script type="text/javascript" src="teletext-resources/teletext.js"></script>
     </head>
     <body>
         <div id="viewer">
@@ -47,7 +47,7 @@
                 <object id="remote2" data="remote2.svg" type="image/svg+xml"></object>
             </div>
             <div id="bitmaps">
-                <img src="../teletext-resources/static.png" id="static">
+                <img src="teletext-resources/static.png" id="static">
                 <img src="start.png" id="start">
             </div>
         </div>
