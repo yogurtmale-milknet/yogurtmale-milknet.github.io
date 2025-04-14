@@ -20,12 +20,23 @@
         <button onclick="showCoinFlip()">Coin Flip</button>
     </div>
     
-    <div id="horse-racing" class="game" style="display: none;">
-        <h2>Horse Racing</h2>
-        <p>Place your bet on a horse and watch them race!</p>
-        <button onclick="startHorseRacing()">Start Race</button>
-        <div id="race-result"></div>
-    </div>
+   <div id="horse-racing" class="game" style="display: none;">
+    <h2>Horse Racing</h2>
+    <p>Place your bet on a horse and watch them race!</p>
+    
+    <!-- Betting on horses -->
+    <p>Choose your horse:</p>
+    <select id="horse-selection">
+        <option value="Horse 1">Horse 1</option>
+        <option value="Horse 2">Horse 2</option>
+        <option value="Horse 3">Horse 3</option>
+        <option value="Horse 4">Horse 4</option>
+    </select>
+
+    <button onclick="startHorseRacing()">Start Race</button>
+    <div id="race-result"></div>
+</div>
+
     
     <div id="blackjack" class="game" style="display: none;">
         <h2>Blackjack</h2>
