@@ -1,163 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Casino</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casino Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <!-- Username Setup -->
-    <div id="username-setup" class="screen active">
-      <h1>Welcome to the Casino!</h1>
-      <p>Enter your username to start:</p>
-      <input type="text" id="username-input" placeholder="Your username"/>
-      <button onclick="loadUserData()">Start Game</button>
-      <p>Or import your progress:</p>
-      <input type="file" id="import-file" />
-    </div>
+  <div id="welcome-screen" class="screen active">
+    <input type="text" id="username-input" placeholder="Enter your username" />
+    <button onclick="loadUserData()">Start</button>
+  </div>
 
-    <!-- Main Menu -->
-    <div id="main-menu" class="screen">
-      <h2>Welcome, <span id="player-username"></span>!</h2>
-      <p>Money: $<span id="player-money"></span></p>
-      <p>Level: <span id="player-level"></span> | XP: <span id="player-xp"></span>/<span id="player-xp-max"></span></p>
-      <div id="xp-bar"><div id="xp-progress"></div></div>
+  <div id="main-menu" class="screen">
+    <h1>Welcome, <span id="player-username"></span></h1>
+    <p>Money: $<span id="player-money"></span></p>
+    <p>Level: <span id="player-level"></span></p>
+    <p>XP: <span id="player-xp"></span>/<span id="player-xp-max"></span></p>
+    <div id="xp-progress" class="xp-progress"></div>
+    <button onclick="returnToMenu()">Back to Main Menu</button>
 
-      <h3>Select a Game:</h3>
-      <button onclick="showScreen('blackjack')">Blackjack</button>
-      <button onclick="showScreen('slots')">Slots</button>
-      <button onclick="showScreen('roulette')">Roulette</button>
-      <button onclick="showScreen('horse')">Horse Betting</button>
-      <button onclick="showScreen('war')">Casino War</button>
-      <button onclick="showScreen('coinflip')">Coin Flip</button>
-      <button onclick="showScreen('crash')">Crash</button>
-      <button onclick="showScreen('keno')">Keno</button>
-      <button onclick="showScreen('stats')">View Stats</button>
+    <!-- Games list goes here -->
+    <button onclick="startBlackjack()">Blackjack</button>
+    <button onclick="playSlots()">Slots</button>
+    <button onclick="playRoulette()">Roulette</button>
+    <button onclick="placeHorseBet()">Horse Betting</button>
+    <button onclick="flipCoin()">Coin Flip</button>
+    <button onclick="playKeno()">Keno</button>
+  </div>
 
-      <h3>Options:</h3>
-      <button onclick="exportUserData()">Export Progress</button>
-    </div>
-
-    <!-- Blackjack Game -->
-    <div id="blackjack" class="screen">
-      <h2>🃏 Blackjack 🃏</h2>
-      <p>Money: $<span id="blackjack-money"></span></p>
-      <input type="number" id="blackjack-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="startBlackjack()">Place Bet</button>
-      <div id="blackjack-game" class="hidden">
-        <p>Your Cards: <span id="player-cards"></span> (<span id="player-total"></span>)</p>
-        <p>Dealer's Cards: <span id="dealer-cards"></span></p>
-        <button onclick="hitCard()">Hit</button>
-        <button onclick="stand()">Stand</button>
-      </div>
-      <p id="blackjack-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Slots Game -->
-    <div id="slots" class="screen">
-      <h2>🎰 Slots 🎰</h2>
-      <p>Money: $<span id="slots-money"></span></p>
-      <input type="number" id="slots-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="playSlots()">Spin</button>
-      <div id="slots-result">
-        <div id="slots-reels">
-          <span class="reel"><span>-</span></span>
-          <span class="reel"><span>-</span></span>
-          <span class="reel"><span>-</span></span>
-        </div>
-        <p id="slots-message"></p>
-      </div>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Roulette Game -->
-    <div id="roulette" class="screen">
-      <h2>🎲 Roulette 🎲</h2>
-      <p>Money: $<span id="roulette-money"></span></p>
-      <div id="roulette-animation"></div>
-      <input type="number" id="roulette-bet" min="1" placeholder="Enter your bet"/>
-      <select id="roulette-choice">
-        <option value="red">Red</option>
-        <option value="black">Black</option>
-        <option value="green">Green (0)</option>
-      </select>
-      <button onclick="playRoulette()">Spin</button>
-      <p id="roulette-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Horse Betting Game -->
-    <div id="horse" class="screen">
-      <h2>🐎 Horse Betting 🐎</h2>
-      <p>Money: $<span id="horse-money"></span></p>
-      <input type="number" id="horse-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="placeHorseBet()">Place Bet</button>
-      <p id="horse-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Casino War Game -->
-    <div id="war" class="screen">
-      <h2>⚔️ Casino War ⚔️</h2>
-      <p>Money: $<span id="war-money"></span></p>
-      <input type="number" id="war-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="startWar()">Start War</button>
-      <p id="war-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Coin Flip Game -->
-    <div id="coinflip" class="screen">
-      <h2>💰 Coin Flip 💰</h2>
-      <p>Money: $<span id="coinflip-money"></span></p>
-      <input type="number" id="coinflip-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="flipCoin()">Flip Coin</button>
-      <p id="coinflip-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Crash Game -->
-    <div id="crash" class="screen">
-      <h2>📈 Crash 📈</h2>
-      <p>Money: $<span id="crash-money"></span></p>
-      <div id="crash-animation"></div>
-      <input type="number" id="crash-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="playCrash()">Play</button>
-      <p id="crash-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Keno Game -->
-    <div id="keno" class="screen">
-      <h2>🎱 Keno 🎱</h2>
-      <p>Money: $<span id="keno-money"></span></p>
-      <input type="number" id="keno-bet" min="1" placeholder="Enter your bet"/>
-      <button onclick="playKeno()">Play</button>
-      <p id="keno-result"></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
-    <!-- Stats Screen -->
-    <div id="stats" class="screen">
-      <h2>📊 Stats 📊</h2>
-      <p>Username: <span id="stats-username"></span></p>
-      <p>Money: $<span id="stats-money"></span></p>
-      <p>Level: <span id="stats-level"></span></p>
-      <p>XP: <span id="stats-xp"></span></p>
-      <p>Blackjack Wins: <span id="stats-blackjack-wins"></span></p>
-      <p>Slots Wins: <span id="stats-slots-wins"></span></p>
-      <p>Roulette Wins: <span id="stats-roulette-wins"></span></p>
-      <p>Horse Wins: <span id="stats-horse-wins"></span></p>
-      <p>War Wins: <span id="stats-war-wins"></span></p>
-      <p>Coinflip Wins: <span id="stats-coinflip-wins"></span></p>
-      <p>Crash Wins: <span id="stats-crash-wins"></span></p>
-      <p>Keno Wins: <span id="stats-keno-wins"></span></p>
-      <button onclick="returnToMenu()">Return to Menu</button>
-    </div>
-
+  <div id="game-screen" class="screen">
+    <!-- Specific game content will go here (e.g., Blackjack, Slots, etc.) -->
   </div>
 
   <script src="script.js"></script>
