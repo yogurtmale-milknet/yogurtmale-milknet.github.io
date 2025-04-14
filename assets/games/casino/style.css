@@ -1,185 +1,147 @@
-/* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+/* Apply global styles */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #000000, #00aaff); /* Black to Blue gradient */
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 
-h1, h2, h3 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #444;
-}
-
+/* Styling for the app container */
 #app {
   width: 80%;
-  max-width: 800px;
-  margin: auto;
+  max-width: 900px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Screen Handling */
+/* General screen styling */
 .screen {
   display: none;
 }
 
-.active {
+.screen.active {
   display: block;
 }
 
-button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-input[type="number"],
-input[type="text"],
-select {
-  padding: 8px;
-  font-size: 16px;
-  margin: 5px 0;
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-input[type="number"]:focus,
-input[type="text"]:focus,
-select:focus {
-  outline: none;
-  border-color: #007BFF;
-}
-
+/* Heading styles */
 h1, h2, h3 {
+  color: #ffffff;
   text-align: center;
 }
 
-/* Game Screens */
-#username-setup, #main-menu, #blackjack, #slots, #roulette, #crash, #stats {
-  padding: 20px;
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 20px 0;
+}
+
+/* Button styles */
+button {
+  background-color: #00aaff;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0077cc;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: white;
+  font-size: 1rem;
+}
+
+/* Main menu styling */
+#main-menu {
   text-align: center;
 }
 
 #xp-bar {
-  height: 25px;
-  background-color: #f3f3f3;
   width: 100%;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  height: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  margin: 10px 0;
 }
 
 #xp-progress {
   height: 100%;
-  background-color: #4CAF50;
-  border-radius: 12px;
+  background-color: #00aaff;
+  border-radius: 10px;
+  width: 0;
+  transition: width 0.5s;
 }
 
-/* Slots Game */
-#slots-reels {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.reel {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background-color: #ddd;
-  text-align: center;
-  font-size: 24px;
-  line-height: 50px;
-  border-radius: 5px;
-}
-
-#slots-message {
-  font-size: 18px;
+/* Game screens styling */
+#blackjack, #slots, #roulette, #crash, #horse, #war, #coinflip, #keno, #stats {
   margin-top: 20px;
-  color: #333;
-}
-
-/* Roulette Game */
-#roulette-animation {
-  width: 100%;
-  height: 200px;
-  background: #ccc;
-  margin-bottom: 20px;
-}
-
-#roulette-result {
-  font-size: 18px;
-  color: #333;
-  margin-top: 20px;
-}
-
-/* Crash Game */
-#crash-animation {
-  width: 100%;
-  height: 30px;
-  background-color: #ccc;
-  margin-bottom: 20px;
-  transition: transform 1s ease-out;
-}
-
-/* Stats Screen */
-#stats p {
-  font-size: 16px;
-  margin: 5px 0;
-}
-
-/* Import/Export Progress Buttons */
-#import-file,
-#export-progress {
-  margin-top: 10px;
-  padding: 8px;
-  font-size: 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-#import-file:focus,
-#export-progress:focus {
-  outline: none;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .screen {
-    padding: 15px;
-  }
-
-  button {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  #xp-bar {
-    height: 15px;
-  }
-
-  #xp-progress {
-    height: 100%;
-  }
 }
 
 .hidden {
   display: none;
+}
+
+/* Stats screen */
+#stats p {
+  font-size: 1.2rem;
+}
+
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  #app {
+    width: 100%;
+    max-width: none;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
 }
