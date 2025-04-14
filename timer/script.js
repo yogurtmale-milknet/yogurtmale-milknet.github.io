@@ -85,7 +85,7 @@ function setAlarm() {
     }
 
     status.textContent = "⏰ Time to do whatever you need to do";
-    document.title = "Milky the Milk Carton says:";
+    document.title = "my work here is done (unless you create another timer)";
   }, totalMs);
 }
 
