@@ -74,6 +74,42 @@ function startSlots() {
 
 // Coin Flip Game
 function flipCoin() {
-    const result = Math.random() < 0.5 ? 'Heads' : 'Tails';
-    document.getElementById('coin-flip-result').innerText = `The result is: ${result}`;
+    // Get the player's choice
+    const playerChoice = document.getElementById('coin-choice').value;
+    const outcomes = ['Heads', 'Tails'];
+    
+    // Randomly determine the coin flip result
+    const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+
+    // Display the result
+    let resultMessage = `You chose ${playerChoice}. The coin landed on ${result}. `;
+    if (playerChoice === result) {
+        resultMessage += "Congratulations, you win!";
+    } else {
+        resultMessage += "Sorry, better luck next time!";
+    }
+
+    document.getElementById('coin-flip-result').innerText = resultMessage;
+}
+
+
+
+// Horse Racing Game
+function startHorseRacing() {
+    // Get the horse selected by the player
+    const playerHorse = document.getElementById('horse-selection').value;
+    const horses = ['Horse 1', 'Horse 2', 'Horse 3', 'Horse 4'];
+    
+    // Simulate the race and randomly choose a winner
+    const winner = horses[Math.floor(Math.random() * horses.length)];
+
+    // Display the results
+    let resultMessage = `You bet on ${playerHorse}. `;
+    if (playerHorse === winner) {
+        resultMessage += `Congratulations! ${winner} wins the race!`;
+    } else {
+        resultMessage += `Sorry, ${winner} wins the race. Better luck next time!`;
+    }
+
+    document.getElementById('race-result').innerText = resultMessage;
 }
