@@ -20,17 +20,67 @@
     <div id="xp-progress" class="xp-progress"></div>
     <button onclick="returnToMenu()">Back to Main Menu</button>
 
-    <!-- Games list goes here -->
-    <button onclick="startBlackjack()">Blackjack</button>
-    <button onclick="playSlots()">Slots</button>
-    <button onclick="playRoulette()">Roulette</button>
-    <button onclick="placeHorseBet()">Horse Betting</button>
-    <button onclick="flipCoin()">Coin Flip</button>
-    <button onclick="playKeno()">Keno</button>
+    <!-- Game buttons -->
+    <button id="blackjack-btn">Blackjack</button>
+    <button id="slots-btn">Slots</button>
+    <button id="roulette-btn">Roulette</button>
+    <button id="horse-btn">Horse Betting</button>
+    <button id="coinflip-btn">Coin Flip</button>
+    <button id="keno-btn">Keno</button>
   </div>
 
-  <div id="game-screen" class="screen">
-    <!-- Specific game content will go here (e.g., Blackjack, Slots, etc.) -->
+  <!-- Blackjack Game UI -->
+  <div id="blackjack-screen" class="screen">
+    <input type="number" id="blackjack-bet" placeholder="Enter bet amount" />
+    <button onclick="startBlackjack()">Play Blackjack</button>
+    <p id="blackjack-result"></p>
+    <p>Money: $<span id="blackjack-money"></span></p>
+    <button onclick="returnToMenu()">Back to Menu</button>
+  </div>
+
+  <!-- Slots Game UI -->
+  <div id="slots-screen" class="screen">
+    <input type="number" id="slots-bet" placeholder="Enter bet amount" />
+    <button onclick="startSlots()">Play Slots</button>
+    <p id="slots-result"></p>
+    <p>Money: $<span id="slots-money"></span></p>
+    <button onclick="returnToMenu()">Back to Menu</button>
+  </div>
+
+  <!-- Roulette Game UI -->
+  <div id="roulette-screen" class="screen">
+    <input type="number" id="roulette-bet" placeholder="Enter bet amount" />
+    <button onclick="startRoulette()">Play Roulette</button>
+    <p id="roulette-result"></p>
+    <p>Money: $<span id="roulette-money"></span></p>
+    <button onclick="returnToMenu()">Back to Menu</button>
+  </div>
+
+  <!-- Horse Betting Game UI -->
+  <div id="horse-screen" class="screen">
+    <input type="number" id="horse-bet" placeholder="Enter bet amount" />
+    <button onclick="startHorseBetting()">Place Bet</button>
+    <p id="horse-result"></p>
+    <p>Money: $<span id="horse-money"></span></p>
+    <button onclick="returnToMenu()">Back to Menu</button>
+  </div>
+
+  <!-- Coin Flip Game UI -->
+  <div id="coinflip-screen" class="screen">
+    <input type="number" id="coinflip-bet" placeholder="Enter bet amount" />
+    <button onclick="flipCoin()">Flip Coin</button>
+    <p id="coinflip-result"></p>
+    <p>Money: $<span id="coinflip-money"></span></p>
+    <button onclick="returnToMenu()">Back to Menu</button>
+  </div>
+
+  <!-- Keno Game UI -->
+  <div id="keno-screen" class="screen">
+    <input type="number" id="keno-bet" placeholder="Enter bet amount" />
+    <button onclick="playKeno()">Play Keno</button>
+    <p id="keno-result"></p>
+    <p>Money: $<span id="keno-money"></span></p>
+    <button onclick="returnToMenu()">Back to Menu</button>
   </div>
 
   <script src="script.js"></script>
