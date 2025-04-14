@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MilkNet | Graphing Calculator</title>
+  <link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+    }
+
+    input, button, select {
+      font-size: 1rem;
+      padding: 6px 10px;
+      margin: 10px;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #555;
+    }
+
+    input:focus, button:focus, select:focus {
+      outline: none;
+      border-color: #0af;
+    }
+
+    canvas {
+      max-width: 100%;
+      height: 400px;
+    }
+
+    .color-inputs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .range-controls {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Graphing Calculator</h1>
+  <label for="functionInput">Enter functions (comma-separated, in terms of x):</label><br/>
+  <input type="text" id="functionInput" value="sin(x), x^2" /><br/>
+  <div class="color-inputs" id="colorInputs"></div>
+  <div class="range-controls">
+    <label>X Range: from <input type="number" id="xMin" value="-10" /> to <input type="number" id="xMax" value="10" /></label>
+    <label> Step: <input type="number" id="xStep" value="0.1" step="0.1" /></label>
+  </div>
+  <button onclick="plotFunction()">Plot</button>
+  <button onclick="downloadGraph()">Save Graph</button>
+  <button onclick="resetZoom()">Reset Zoom</button>
+
+  <canvas id="graph" width="600" height="400"></canvas>
+
+  <script>
+    const ctx = document.getElementById('graph').getContext('2d');
+    let chart;
+
+    function generateColorPickers(functions) {
+      const container = document.getElementById('colorInputs');
+      functions.forEach((_, i) => {
+        if (!document.getElementById(`color${i}`)) {
+          const colorInput = document.createElement('input');
+          colorInput.type = 'color';
+          colorInput.value = getColorFromIndex(i);
+          colorInput.id = `color${i}`;
+          container.appendChild(colorInput);
+        }
+      });
+    }
+
+    function getColorFromIndex(i) {
+      const defaultColors = ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#00ff99', '#ff9933'];
+      return defaultColors[i % defaultColors.length];
+    }
+
+    function plotFunction() {
+      const exprInput = document.getElementById('functionInput').value;
+      const functions = exprInput.split(',').map(fn => fn.trim());
+      const xMin = parseFloat(document.getElementById('xMin').value);
+      const xMax = parseFloat(document.getElementById('xMax').value);
+      const xStep = parseFloat(document.getElementById('xStep').value);
+
+      generateColorPickers(functions);
+
+      const xValues = [];
+      for (let x = xMin; x <= xMax; x += xStep) {
+        xValues.push(x.toFixed(2));
+      }
+
+      const datasets = functions.map((expr, i) => {
+        const yValues = [];
+        for (let x = xMin; x <= xMax; x += xStep) {
+          try {
+            const scope = { x: x };
+            const y = math.evaluate(expr, scope);
+            yValues.push(y);
+          } catch {
+            yValues.push(null);
+          }
+        }
+
+        const color = document.getElementById(`color${i}`).value;
+        return {
+          label: `y = ${expr}`,
+          data: yValues,
+          borderColor: color,
+          backgroundColor: color,
+          fill: false,
+          tension: 0.1,
+          pointRadius: 0
+        };
+      });
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: xValues,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: { color: 'white' }
+            },
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'xy',
+                modifierKey: 'ctrl'
+              },
+              zoom: {
+                wheel: { enabled: true },
+                pinch: { enabled: true },
+                mode: 'xy'
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: { display: true, text: 'x', color: 'white' },
+              ticks: { color: 'white' },
+              grid: { color: '#333' }
+            },
+            y: {
+              title: { display: true, text: 'y', color: 'white' },
+              ticks: { color: 'white' },
+              grid: { color: '#333' }
+            }
+          }
+        }
+      });
+    }
+
+    function resetZoom() {
+      if (chart) chart.resetZoom();
+    }
+
+    function downloadGraph() {
+      const link = document.createElement('a');
+      link.download = 'graph.png';
+      link.href = document.getElementById('graph').toDataURL();
+      link.click();
+    }
+
+    window.onload = () => {
+      plotFunction(); // initial plot
+    };
+  </script>
+</body>
+</html>
