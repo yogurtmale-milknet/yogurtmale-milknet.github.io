@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="app">
+    <!-- Username Setup Screen -->
+    <div id="username-setup" class="screen active">
+      <h1>Welcome to the Casino!</h1>
+      <p>Enter your username to start:</p>
+      <input type="text" id="username-input" placeholder="Your username"/>
+      <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Main Menu Screen -->
+    <div id="main-menu" class="screen">
+      <h2>Welcome, <span id="player-username"></span>!</h2>
+      <p>Money: $<span id="player-money"></span></p>
+      <p>Level: <span id="player-level"></span> | XP: <span id="player-xp"></span>/<span id="player-xp-max"></span></p>
+      <div id="xp-bar"><div id="xp-progress"></div></div>
+
+      <h3>Select a Game:</h3>
+      <button onclick="showScreen('blackjack')">Blackjack</button>
+      <button onclick="showScreen('stats')">View Stats</button>
+    </div>
+
+    <!-- Blackjack Screen -->
+    <div id="blackjack" class="screen">
+      <h2>🃏 Blackjack 🃏</h2>
+      <p>Money: $<span id="blackjack-money"></span></p>
+      <p>Enter your bet:</p>
+      <input type="number" id="blackjack-bet" min="1"/>
+      <button onclick="startBlackjack()">Place Bet</button>
+
+      <div id="blackjack-game" class="hidden">
+        <p>Your Cards: <span id="player-cards"></span> (<span id="player-total"></span>)</p>
+        <p>Dealer's Cards: <span id="dealer-cards"></span></p>
+        <button onclick="hitCard()">Hit</button>
+        <button onclick="stand()">Stand</button>
+      </div>
+
+      <p id="blackjack-result"></p>
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
+    <!-- Stats Screen -->
+    <div id="stats" class="screen">
+      <h2>📊 Stats 📊</h2>
+      <p>Username: <span id="stats-username"></span></p>
+      <p>Money: $<span id="stats-money"></span></p>
+      <p>Level: <span id="stats-level"></span></p>
+      <p>XP: <span id="stats-xp"></span></p>
+      <p>Blackjack Wins: <span id="stats-blackjack-wins"></span></p>
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
