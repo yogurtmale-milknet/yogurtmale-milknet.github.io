@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MilkNet | Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>⏰ Timer</h1>
+
+  <input id="timeInput" type="text" placeholder="mm:ss (e.g. 69:42)" />
+  <br>
+  <input id="messageInput" type="text" placeholder="Your timer message" />
+  <br>
+  <button onclick="setAlarm()">Start</button>
+
+  <p id="status"></p>
+
+  <audio id="alarmSound" src="alarm.mp3" preload="auto"></audio>
+
+  <div id="customSoundContainer">
+    <label for="soundFileInput">🎵 Upload Custom Sound</label>
+    <input type="file" id="soundFileInput" accept=".mp3,.flac,.ogg,.m4a,.wav" />
+    <small>Supports: MP3, FLAC, OGG, M4A, WAV</small>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
