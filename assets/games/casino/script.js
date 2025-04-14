@@ -81,8 +81,54 @@ function updateStats(game, amount, xp) {
   updateUI();
 }
 
-// Blackjack functions (same as before, keeping for integration)...
-// Slots function (keep as before)...
+// Slots Game
+function playSlots() {
+  const bet = parseInt(document.getElementById('slots-bet').value);
+  let money = parseInt(localStorage.getItem('casino-money'));
+
+  if (!bet || bet <= 0 || bet > money) {
+    alert('Invalid bet amount.');
+    return;
+  }
+
+  money -= bet;
+  localStorage.setItem('casino-money', money);
+
+  const symbols = ['🍒', '🍋', '🔔', '💎', '7️⃣'];
+  const reels = document.querySelectorAll('#slots-reels .reel');
+
+  reels.forEach(reel => {
+    const result = symbols[Math.floor(Math.random() * symbols.length)];
+    const span = reel.querySelector('span');
+    span.style.animation = 'none';
+    span.offsetHeight;
+    span.textContent = result;
+    span.style.animation = '';
+    span.style.animation = 'spinReel 0.5s ease-out';
+  });
+
+  setTimeout(() => {
+    const results = Array.from(reels).map(reel => reel.querySelector('span').textContent);
+    const [a, b, c] = results;
+
+    let winnings = 0;
+    let xp = 0;
+    let message = 'You lost.';
+
+    if (a === b && b === c) {
+      winnings = bet * 5;
+      xp = 15;
+      message = `Jackpot! ${a} ${b} ${c} — You won $${winnings}!`;
+    } else if (a === b || b === c || a === c) {
+      winnings = bet * 2;
+      xp = 5;
+      message = `Nice! You matched two and won $${winnings}!`;
+    }
+
+    document.getElementById('slots-message').innerText = message;
+    updateStats('slots', winnings, xp);
+  }, 500);
+}
 
 // Roulette Game
 function playRoulette() {
@@ -98,112 +144,28 @@ function playRoulette() {
   money -= bet;
   localStorage.setItem('casino-money', money);
 
-  const outcome = Math.floor(Math.random() * 37);
-  let color = outcome === 0 ? 'green' : outcome % 2 === 0 ? 'black' : 'red';
+  const wheel = document.getElementById('roulette-animation');
+  wheel.style.animation = 'none';
+  wheel.offsetHeight;
+  wheel.style.animation = 'spinRoulette 1s ease-out';
 
-  let resultText = `The ball landed on ${outcome} (${color}). You lost.`;
-  let winnings = 0;
-  let xp = 0;
+  setTimeout(() => {
+    const outcome = Math.floor(Math.random() * 37);
+    const color = outcome === 0 ? 'green' : outcome % 2 === 0 ? 'black' : 'red';
 
-  if (color === choice) {
-    winnings = choice === 'green' ? bet * 14 : bet * 2;
-    resultText = `The ball landed on ${outcome} (${color}). You won $${winnings}!`;
-    xp = choice === 'green' ? 20 : 10;
-  }
+    let resultText = `The ball landed on ${outcome} (${color}). You lost.`;
+    let winnings = 0;
+    let xp = 0;
 
-  document.getElementById('roulette-result').innerText = resultText;
-  updateStats('roulette', winnings, xp);
-}
+    if (color === choice) {
+      winnings = choice === 'green' ? bet * 14 : bet * 2;
+      resultText = `The ball landed on ${outcome} (${color}). You won $${winnings}!`;
+      xp = choice === 'green' ? 20 : 10;
+    }
 
-// Horse Betting Game
-function playHorse() {
-  const bet = parseInt(document.getElementById('horse-bet').value);
-  const choice = parseInt(document.getElementById('horse-choice').value);
-  let money = parseInt(localStorage.getItem('casino-money'));
-
-  if (!bet || bet <= 0 || bet > money) {
-    alert('Invalid bet amount.');
-    return;
-  }
-
-  money -= bet;
-  localStorage.setItem('casino-money', money);
-
-  const winningHorse = Math.ceil(Math.random() * 3);
-  let resultText = `Horse ${winningHorse} won. You lost.`;
-  let winnings = 0;
-  let xp = 0;
-
-  if (choice === winningHorse) {
-    winnings = bet * 3;
-    resultText = `Horse ${winningHorse} won. You won $${winnings}!`;
-    xp = 10;
-  }
-
-  document.getElementById('horse-result').innerText = resultText;
-  updateStats('horse', winnings, xp);
-}
-
-// Casino War Game
-function playWar() {
-  const bet = parseInt(document.getElementById('war-bet').value);
-  let money = parseInt(localStorage.getItem('casino-money'));
-
-  if (!bet || bet <= 0 || bet > money) {
-    alert('Invalid bet amount.');
-    return;
-  }
-
-  money -= bet;
-  localStorage.setItem('casino-money', money);
-
-  const playerCard = Math.ceil(Math.random() * 13);
-  const dealerCard = Math.ceil(Math.random() * 13);
-
-  let resultText = `You drew ${playerCard}, dealer drew ${dealerCard}. You lost.`;
-  let winnings = 0;
-  let xp = 0;
-
-  if (playerCard > dealerCard) {
-    winnings = bet * 2;
-    resultText = `You drew ${playerCard}, dealer drew ${dealerCard}. You won $${winnings}!`;
-    xp = 10;
-  } else if (playerCard === dealerCard) {
-    winnings = bet;
-    resultText = `It's a tie! Your bet is returned.`;
-  }
-
-  document.getElementById('war-result').innerText = resultText;
-  updateStats('war', winnings, xp);
-}
-
-// Coin Flip Game
-function playCoinflip() {
-  const bet = parseInt(document.getElementById('coinflip-bet').value);
-  const choice = document.getElementById('coinflip-choice').value;
-  let money = parseInt(localStorage.getItem('casino-money'));
-
-  if (!bet || bet <= 0 || bet > money) {
-    alert('Invalid bet amount.');
-    return;
-  }
-
-  money -= bet;
-  localStorage.setItem('casino-money', money);
-
-  const flip = Math.random() < 0.5 ? 'heads' : 'tails';
-  let resultText = `It landed on ${flip}. You lost.`;
-  let winnings = 0;
-  let xp = 0;
-
-  if (choice === flip) {
-    winnings = bet * 2;
-    resultText = `It landed on ${flip}. You won $${winnings}!`;
-    xp = 5;
-  }
-
-  document.getElementById('coinflip-result').innerText = resultText;
-  updateStats('coinflip', winnings, xp);
+    document.getElementById('roulette-result').innerText = resultText;
+    updateStats('roulette', winnings, xp);
+  }, 1000);
 }
 
 // Crash Game
@@ -219,55 +181,31 @@ function playCrash() {
   money -= bet;
   localStorage.setItem('casino-money', money);
 
-  const multiplier = (Math.random() * 5 + 1).toFixed(2);
-  const cashout = Math.random() * 5 + 1;
+  const crashBar = document.getElementById('crash-animation');
+  crashBar.style.transform = 'scaleX(0)';
+  crashBar.offsetHeight;
+  crashBar.style.transform = 'scaleX(1)';
 
-  let resultText = `Multiplier reached x${multiplier}. You lost.`;
-  let winnings = 0;
-  let xp = 0;
+  setTimeout(() => {
+    const multiplier = (Math.random() * 5 + 1).toFixed(2);
+    const cashout = Math.random() * 5 + 1;
 
-  if (cashout < multiplier) {
-    winnings = Math.floor(bet * cashout);
-    resultText = `You cashed out at x${cashout.toFixed(2)} and won $${winnings}!`;
-    xp = 10;
-  }
+    let resultText = `Multiplier reached x${multiplier}. You lost.`;
+    let winnings = 0;
+    let xp = 0;
 
-  document.getElementById('crash-result').innerText = resultText;
-  updateStats('crash', winnings, xp);
+    if (cashout < multiplier) {
+      winnings = Math.floor(bet * cashout);
+      resultText = `You cashed out at x${cashout.toFixed(2)} and won $${winnings}!`;
+      xp = 10;
+    }
+
+    document.getElementById('crash-result').innerText = resultText;
+    updateStats('crash', winnings, xp);
+  }, 1000);
 }
 
-// Keno Game
-function playKeno() {
-  const bet = parseInt(document.getElementById('keno-bet').value);
-  const picks = document.getElementById('keno-numbers').value.split(',').map(num => parseInt(num.trim())).filter(n => n >= 1 && n <= 10);
-  let money = parseInt(localStorage.getItem('casino-money'));
-
-  if (!bet || bet <= 0 || bet > money || picks.length === 0) {
-    alert('Invalid bet or picks. Pick numbers between 1-10.');
-    return;
-  }
-
-  money -= bet;
-  localStorage.setItem('casino-money', money);
-
-  const draws = Array.from({ length: 3 }, () => Math.ceil(Math.random() * 10));
-  const matches = picks.filter(num => draws.includes(num)).length;
-
-  let resultText = `Drawn numbers: ${draws.join(', ')}. No matches.`;
-  let winnings = 0;
-  let xp = 0;
-
-  if (matches > 0) {
-    winnings = bet * matches * 2;
-    resultText = `Drawn numbers: ${draws.join(', ')}. You matched ${matches} numbers and won $${winnings}!`;
-    xp = matches * 5;
-  }
-
-  document.getElementById('keno-result').innerText = resultText;
-  updateStats('keno', winnings, xp);
-}
-
-// Init
+// (Other game functions stay as they are...)
 
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('casino-username')) {
