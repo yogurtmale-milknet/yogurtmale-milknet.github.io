@@ -67,3 +67,60 @@ button:hover {
 .hidden {
   display: none;
 }
+
+/* Slots Animation */
+@keyframes spinReel {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.reel {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.reel span {
+  display: block;
+  animation: spinReel 0.5s ease-out;
+  font-size: 24px;
+}
+
+/* Roulette Animation */
+@keyframes spinRoulette {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+#roulette-animation {
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+  border: 5px solid #fff;
+  border-top: 5px solid red;
+  border-radius: 50%;
+  animation: none;
+}
+
+/* Crash Animation */
+#crash-animation {
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to right, #4CAF50, #f44336);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s ease-out;
+  margin-bottom: 10px;
+}
