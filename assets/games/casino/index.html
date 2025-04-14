@@ -11,13 +11,14 @@
     <header>
         <h1>MilkNet Casino</h1>
         <p>Feeling lucky?</p>
+        <p id="balance">Balance: $1000</p>
     </header>
     
     <div class="game-selection">
-        <button onclick="showHorseRacing()">Horse Racing</button>
-        <button onclick="showBlackjack()">Blackjack</button>
-        <button onclick="showSlots()">Slots</button>
-        <button onclick="showCoinFlip()">Coin Flip</button>
+        <button onclick="showGame('horse-racing')">Horse Racing</button>
+        <button onclick="showGame('blackjack')">Blackjack</button>
+        <button onclick="showGame('slots')">Slots</button>
+        <button onclick="showGame('coin-flip')">Coin Flip</button>
     </div>
     
    <div id="horse-racing" class="game" style="display: none;">
@@ -42,13 +43,15 @@
         <h2>Blackjack</h2>
         <p>Try to beat the dealer with a better hand!</p>
         <button onclick="startBlackjack()">Start Game</button>
+        <p id="blackjack-status"></p>
+        <p id="blackjack-cards"></p>
         <div id="blackjack-result"></div>
     </div>
     
     <div id="slots" class="game" style="display: none;">
         <h2>Slots</h2>
         <p>Spin, spin, spin!</p>
-        <button onclick="startSlots()">Spin</button>
+        <button onclick="playSlots()">Spin</button>
         <div id="slots-result"></div>
     </div>
     
