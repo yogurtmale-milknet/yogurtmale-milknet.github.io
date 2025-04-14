@@ -11,6 +11,7 @@ let typedText = '';
 let totalWords = 0;
 let correctWords = 0;
 let isTyping = false;
+let originalText = '';
 
 const texts = [
     "the quick brown fox jumps over the lazy dog",
@@ -45,16 +46,36 @@ const texts = [
     "it sounds like a lot of hoopla lemon lime cake"
 ];
 
+// Randomly select a text
 function getRandomText() {
     const randomIndex = Math.floor(Math.random() * texts.length);
     return texts[randomIndex];
 }
 
+// Set the text to type
 function setTextToType() {
-    const randomText = getRandomText();
-    textToTypeElement.innerText = randomText;
+    originalText = getRandomText();
+    updateHighlightedText();
 }
 
+// Highlight typed words
+function updateHighlightedText() {
+    const inputWords = typedText.trim().split(/\s+/);
+    const textWords = originalText.split(' ');
+
+    const highlighted = textWords.map((word, index) => {
+        if (!inputWords[index]) return `<span>${word}</span>`;
+        if (inputWords[index] === word) {
+            return `<span style="color: #00ff00">${word}</span>`; // green for correct
+        } else {
+            return `<span style="color: #ff4444">${word}</span>`; // red for wrong
+        }
+    });
+
+    textToTypeElement.innerHTML = highlighted.join(' ');
+}
+
+// Start a new typing test
 function startTest() {
     setTextToType();
     userInput.value = '';
@@ -66,6 +87,7 @@ function startTest() {
     clearInterval(timer);
 }
 
+// Calculate accuracy and speed
 function countCorrectWords(input, text) {
     const inputWords = input.split(' ');
     const textWords = text.split(' ');
@@ -79,15 +101,23 @@ function countCorrectWords(input, text) {
 }
 
 function updateStats() {
-    const totalWordsTyped = typedText.split(' ').length;
-    correctWords = countCorrectWords(typedText, textToTypeElement.innerText);
-    const speed = Math.round((totalWordsTyped / 5) / (seconds / 60));
-    const accuracy = Math.round((correctWords / totalWordsTyped) * 100);
+    const totalWordsTyped = typedText.trim().split(/\s+/).length;
+    correctWords = countCorrectWords(typedText, originalText);
+
+    let speed = 0;
+    if (seconds > 0) {
+        speed = Math.round((totalWordsTyped / 5) / (seconds / 60));
+    }
+
+    const accuracy = totalWordsTyped > 0
+        ? Math.round((correctWords / totalWordsTyped) * 100)
+        : 100;
 
     speedDisplay.innerText = speed;
     accuracyDisplay.innerText = accuracy;
 }
 
+// Event listener for user input
 userInput.addEventListener('input', function() {
     if (!isTyping) {
         startTimer();
@@ -97,8 +127,10 @@ userInput.addEventListener('input', function() {
     typedText = userInput.value;
     totalWords = typedText.split(' ').length;
     updateStats();
+    updateHighlightedText();
 });
 
+// Timer function
 function startTimer() {
     timer = setInterval(function() {
         seconds++;
@@ -106,6 +138,8 @@ function startTimer() {
     }, 1000);
 }
 
+// Restart test when the button is clicked
 restartButton.addEventListener('click', startTest);
 
+// Initialize the page
 startTest();
