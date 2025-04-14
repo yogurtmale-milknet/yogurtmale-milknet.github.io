@@ -1,226 +1,107 @@
-// Global variables to hold player data
-let username = '';
-let money = 1000;  // Starting money
-let level = 1;
-let xp = 0;
-let xpMax = 100;
-let blackjackWins = 0;
-let slotsWins = 0;
-let rouletteWins = 0;
-let horseWins = 0;
-let warWins = 0;
-let coinflipWins = 0;
-let crashWins = 0;
-let kenoWins = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  // Attach event listeners to game buttons
+  document.getElementById('blackjack-btn').addEventListener('click', () => showGameScreen('blackjack'));
+  document.getElementById('slots-btn').addEventListener('click', () => showGameScreen('slots'));
+  document.getElementById('roulette-btn').addEventListener('click', () => showGameScreen('roulette'));
+  document.getElementById('horse-btn').addEventListener('click', () => showGameScreen('horse'));
+  document.getElementById('coinflip-btn').addEventListener('click', () => showGameScreen('coinflip'));
+  document.getElementById('keno-btn').addEventListener('click', () => showGameScreen('keno'));
+});
 
-// Load user data from localStorage (if any)
-function loadUserData() {
-  const inputUsername = document.getElementById('username-input').value;
-  if (inputUsername) {
-    username = inputUsername;
-    // Load other data if exists in localStorage
-    money = parseInt(localStorage.getItem('money')) || money;
-    level = parseInt(localStorage.getItem('level')) || level;
-    xp = parseInt(localStorage.getItem('xp')) || xp;
-    xpMax = parseInt(localStorage.getItem('xpMax')) || xpMax;
+function showGameScreen(game) {
+  // Hide all game screens
+  document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
 
-    // Set the player data on the main menu
-    document.getElementById('player-username').textContent = username;
-    document.getElementById('player-money').textContent = money;
-    document.getElementById('player-level').textContent = level;
-    document.getElementById('player-xp').textContent = xp;
-    document.getElementById('player-xp-max').textContent = xpMax;
-    document.getElementById('xp-progress').style.width = (xp / xpMax) * 100 + '%';
-
-    // Save data to localStorage
-    localStorage.setItem('username', username);
-    localStorage.setItem('money', money);
-    localStorage.setItem('level', level);
-    localStorage.setItem('xp', xp);
-    localStorage.setItem('xpMax', xpMax);
-
-    // Show the main menu screen
-    showScreen('main-menu');
-  } else {
-    alert('Please enter a username.');
-  }
+  // Show the selected game screen
+  document.getElementById(`${game}-screen`).classList.add('active');
 }
 
-// Show a specific screen
-function showScreen(screenId) {
-  const screens = document.querySelectorAll('.screen');
-  screens.forEach(screen => {
-    screen.classList.remove('active');
-  });
-  const screenToShow = document.getElementById(screenId);
-  if (screenToShow) {
-    screenToShow.classList.add('active');
-  }
-}
-
-// Return to the main menu
 function returnToMenu() {
-  showScreen('main-menu');
+  // Hide all game screens and show the main menu
+  document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+  document.getElementById('main-menu').classList.add('active');
 }
 
-// Export user data as JSON
-function exportUserData() {
-  const userData = {
-    username: localStorage.getItem('username'),
-    money: localStorage.getItem('money'),
-    level: localStorage.getItem('level'),
-    xp: localStorage.getItem('xp'),
-    xpMax: localStorage.getItem('xpMax'),
-  };
-  const fileContent = JSON.stringify(userData);
-  const blob = new Blob([fileContent], { type: 'application/json' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'userData.json';
-  link.click();
-}
-
-// Handle daily rewards
-function addDailyReward() {
-  const lastLogin = localStorage.getItem('lastLogin');
-  const today = new Date().toLocaleDateString();
-  if (lastLogin !== today) {
-    money += 300;  // Add $300 as a daily reward
-    localStorage.setItem('lastLogin', today);
-    alert('You have received your daily reward of $300!');
-  }
-  document.getElementById('player-money').textContent = money;
-  localStorage.setItem('money', money);
-}
-
-// Blackjack game logic
+// Blackjack Game Logic
 function startBlackjack() {
   const bet = parseInt(document.getElementById('blackjack-bet').value);
   if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
-  // Blackjack game logic goes here...
-  // Update balance after game logic
+  // Game logic here
   money -= bet;
-  blackjackWins++;
   document.getElementById('blackjack-money').textContent = money;
-  document.getElementById('blackjack-result').textContent = `Blackjack Wins: ${blackjackWins}`;
+  document.getElementById('blackjack-result').textContent = `Game result: ...`;
   localStorage.setItem('money', money);
-  localStorage.setItem('blackjackWins', blackjackWins);
 }
 
-// Slots game logic
-function playSlots() {
+// Slots Game Logic
+function startSlots() {
   const bet = parseInt(document.getElementById('slots-bet').value);
   if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
-  // Simulate a slot machine spin
-  const results = ['🍒', '🍉', '🍇', '🍓', '🍊'];
-  const reel1 = results[Math.floor(Math.random() * results.length)];
-  const reel2 = results[Math.floor(Math.random() * results.length)];
-  const reel3 = results[Math.floor(Math.random() * results.length)];
-
-  document.getElementById('slots-reels').innerHTML = `<span class="reel">${reel1}</span><span class="reel">${reel2}</span><span class="reel">${reel3}</span>`;
-  // Logic for checking winning and updating balance goes here
+  // Game logic here
   money -= bet;
-  slotsWins++;
   document.getElementById('slots-money').textContent = money;
-  document.getElementById('slots-result').textContent = `Slots Wins: ${slotsWins}`;
+  document.getElementById('slots-result').textContent = `Game result: ...`;
   localStorage.setItem('money', money);
-  localStorage.setItem('slotsWins', slotsWins);
 }
 
-// Roulette game logic
-function playRoulette() {
+// Roulette Game Logic
+function startRoulette() {
   const bet = parseInt(document.getElementById('roulette-bet').value);
   if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
-  const choice = document.getElementById('roulette-choice').value;
-  const result = Math.floor(Math.random() * 37);  // 0-36 for roulette numbers
-  const colors = ['red', 'black', 'green'];
-  const color = result === 0 ? 'green' : (result % 2 === 0 ? 'black' : 'red');
-  
-  let message = `Result: ${result} (${color})`;
-  if ((choice === 'red' && color === 'red') || (choice === 'black' && color === 'black') || (choice === 'green' && result === 0)) {
-    message += ' - You win!';
-    money += bet;
-    rouletteWins++;
-  } else {
-    message += ' - You lose.';
-    money -= bet;
-  }
-  document.getElementById('roulette-result').textContent = message;
+  // Game logic here
+  money -= bet;
   document.getElementById('roulette-money').textContent = money;
+  document.getElementById('roulette-result').textContent = `Game result: ...`;
   localStorage.setItem('money', money);
-  localStorage.setItem('rouletteWins', rouletteWins);
 }
 
-// Horse Betting game logic
-function placeHorseBet() {
+// Horse Betting Game Logic
+function startHorseBetting() {
   const bet = parseInt(document.getElementById('horse-bet').value);
   if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
-  // Simulate the horse race (random outcome)
-  const winner = Math.floor(Math.random() * 4) + 1;  // 1 to 4 horses
-  const message = `Horse ${winner} wins!`;
-
-  if (winner === 1) {  // Let's assume betting on Horse 1 wins
-    message += ' - You win!';
-    money += bet;
-    horseWins++;
-  } else {
-    message += ' - You lose.';
-    money -= bet;
-  }
-
-  document.getElementById('horse-result').textContent = message;
+  // Game logic here
+  money -= bet;
   document.getElementById('horse-money').textContent = money;
+  document.getElementById('horse-result').textContent = `Game result: ...`;
   localStorage.setItem('money', money);
-  localStorage.setItem('horseWins', horseWins);
 }
 
-// Coin Flip game logic
+// Coin Flip Game Logic
 function flipCoin() {
   const bet = parseInt(document.getElementById('coinflip-bet').value);
   if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
-  const result = Math.random() > 0.5 ? 'Heads' : 'Tails';
-  document.getElementById('coinflip-result').textContent = `Result: ${result}`;
-  // Update balance after coin flip outcome
+  // Game logic here
   money -= bet;
-  coinflipWins++;
   document.getElementById('coinflip-money').textContent = money;
+  document.getElementById('coinflip-result').textContent = `Game result: ...`;
   localStorage.setItem('money', money);
-  localStorage.setItem('coinflipWins', coinflipWins);
 }
 
-// Keno game logic
+// Keno Game Logic
 function playKeno() {
   const bet = parseInt(document.getElementById('keno-bet').value);
   if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
-  // Keno logic (random number selection)
-  const numbers = [];
-  for (let i = 0; i < 5; i++) {
-    numbers.push(Math.floor(Math.random() * 80) + 1);  // Pick 5 numbers from 1 to 80
-  }
-
-  const message = `Your numbers: ${numbers.join(', ')}`;
-  document.getElementById('keno-result').textContent = message;
+  // Game logic here
   money -= bet;
-  kenoWins++;
   document.getElementById('keno-money').textContent = money;
+  document.getElementById('keno-result').textContent = `Game result: ...`;
   localStorage.setItem('money', money);
-  localStorage.setItem('kenoWins', kenoWins);
 }
