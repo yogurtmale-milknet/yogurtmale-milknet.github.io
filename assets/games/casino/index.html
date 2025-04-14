@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Casino</title>
+  <title>Casino Web Port</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -25,6 +25,7 @@
 
       <h3>Select a Game:</h3>
       <button onclick="showScreen('blackjack')">Blackjack</button>
+      <button onclick="showScreen('slots')">Slots</button>
       <button onclick="showScreen('stats')">View Stats</button>
     </div>
 
@@ -47,6 +48,22 @@
       <button onclick="returnToMenu()">Return to Menu</button>
     </div>
 
+    <!-- Slots Screen -->
+    <div id="slots" class="screen">
+      <h2>🎰 Slots 🎰</h2>
+      <p>Money: $<span id="slots-money"></span></p>
+      <p>Enter your bet:</p>
+      <input type="number" id="slots-bet" min="1"/>
+      <button onclick="playSlots()">Spin</button>
+
+      <div id="slots-result">
+        <p>Result: <span id="slots-reels">- - -</span></p>
+        <p id="slots-message"></p>
+      </div>
+
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
     <!-- Stats Screen -->
     <div id="stats" class="screen">
       <h2>📊 Stats 📊</h2>
@@ -55,6 +72,7 @@
       <p>Level: <span id="stats-level"></span></p>
       <p>XP: <span id="stats-xp"></span></p>
       <p>Blackjack Wins: <span id="stats-blackjack-wins"></span></p>
+      <p>Slots Wins: <span id="stats-slots-wins"></span></p>
       <button onclick="returnToMenu()">Return to Menu</button>
     </div>
   </div>
