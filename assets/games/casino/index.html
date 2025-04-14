@@ -89,6 +89,36 @@
       <button onclick="returnToMenu()">Return to Menu</button>
     </div>
 
+    <!-- Horse Betting Game -->
+    <div id="horse" class="screen">
+      <h2>🐎 Horse Betting 🐎</h2>
+      <p>Money: $<span id="horse-money"></span></p>
+      <input type="number" id="horse-bet" min="1" placeholder="Enter your bet"/>
+      <button onclick="placeHorseBet()">Place Bet</button>
+      <p id="horse-result"></p>
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
+    <!-- Casino War Game -->
+    <div id="war" class="screen">
+      <h2>⚔️ Casino War ⚔️</h2>
+      <p>Money: $<span id="war-money"></span></p>
+      <input type="number" id="war-bet" min="1" placeholder="Enter your bet"/>
+      <button onclick="startWar()">Start War</button>
+      <p id="war-result"></p>
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
+    <!-- Coin Flip Game -->
+    <div id="coinflip" class="screen">
+      <h2>💰 Coin Flip 💰</h2>
+      <p>Money: $<span id="coinflip-money"></span></p>
+      <input type="number" id="coinflip-bet" min="1" placeholder="Enter your bet"/>
+      <button onclick="flipCoin()">Flip Coin</button>
+      <p id="coinflip-result"></p>
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
     <!-- Crash Game -->
     <div id="crash" class="screen">
       <h2>📈 Crash 📈</h2>
@@ -97,6 +127,16 @@
       <input type="number" id="crash-bet" min="1" placeholder="Enter your bet"/>
       <button onclick="playCrash()">Play</button>
       <p id="crash-result"></p>
+      <button onclick="returnToMenu()">Return to Menu</button>
+    </div>
+
+    <!-- Keno Game -->
+    <div id="keno" class="screen">
+      <h2>🎱 Keno 🎱</h2>
+      <p>Money: $<span id="keno-money"></span></p>
+      <input type="number" id="keno-bet" min="1" placeholder="Enter your bet"/>
+      <button onclick="playKeno()">Play</button>
+      <p id="keno-result"></p>
       <button onclick="returnToMenu()">Return to Menu</button>
     </div>
 
