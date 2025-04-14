@@ -16,7 +16,7 @@ async function uploadFile() {
     formData.append("expiryTime", timeValue);
 
     // Replace with your actual Upload.io API URL and API key
-    const apiUrl = "https://api.upload.io/upload"; // Placeholder API URL
+    const apiUrl = "https://api.upload.io/v1/files"; // Placeholder API URL
     const apiKey = "public_G22nhgTDm1B4ZvL1ia7nmepwHaYL"; // Replace with your Upload.io API key
 
     const response = await fetch(apiUrl, {
