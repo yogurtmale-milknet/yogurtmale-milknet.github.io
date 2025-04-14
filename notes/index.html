@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MilkNet | Notepad</title>
+  <link id="favicon" rel="icon" href="/assets/img/milk.png" type="image/x-icon">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      color: white;
+      font-family: "Helvetica Neue", sans-serif;
+    }
+
+    #toolbar {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      background: #111;
+    }
+
+    #toolbar button, #toolbar select {
+      background: #222;
+      color: white;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    #notepad {
+      width: 100%;
+      height: calc(100% - 48px);
+      background: black;
+      color: white;
+      border: none;
+      resize: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+      font-family: "Helvetica Neue", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="toolbar">
+    <button onclick="format('bold')">Bold</button>
+    <button onclick="format('italic')">Italic</button>
+    <button onclick="insertBullet()">Bullet</button>
+    <button onclick="format('strikeThrough')">Strike</button>
+    <select onchange="changeFontSize(this.value)">
+      <option value="1">Small</option>
+      <option value="3" selected>Normal</option>
+      <option value="5">Large</option>
+      <option value="7">Huge</option>
+    </select>
+    <button onclick="downloadText()">Download as .txt</button>
+    <button onclick="downloadMarkdown()">Download as .md</button>
+  </div>
+  <iframe id="notepad" contenteditable="true"></iframe>
+
+  <script>
+    const iframe = document.getElementById('notepad');
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.designMode = 'on';
+
+    const saved = localStorage.getItem('darkNotepad');
+    doc.body.style.background = 'black';
+    doc.body.style.color = 'white';
+    doc.body.style.margin = '0';
+    doc.body.style.padding = '1rem';
+    doc.body.style.fontFamily = 'Helvetica Neue, sans-serif';
+    doc.body.innerHTML = saved || '';
+
+    doc.addEventListener('input', () => {
+      localStorage.setItem('darkNotepad', doc.body.innerHTML);
+    });
+
+    function format(cmd) {
+      doc.execCommand(cmd, false, null);
+    }
+
+    function insertBullet() {
+      doc.execCommand('insertUnorderedList');
+    }
+
+    function changeFontSize(size) {
+      doc.execCommand('fontSize', false, size);
+    }
+
+    function downloadText() {
+      const textContent = doc.body.innerText;
+      const blob = new Blob([textContent], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'notepad.txt';
+      link.click();
+    }
+
+    function downloadMarkdown() {
+      let markdownContent = doc.body.innerText;
+      markdownContent = markdownContent.replace(/•/g, '-');
+      const blob = new Blob([markdownContent], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'notepad.md';
+      link.click();
+    }
+  </script>
+</body>
+</html>
