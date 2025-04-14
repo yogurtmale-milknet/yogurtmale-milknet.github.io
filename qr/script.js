@@ -1,10 +1,13 @@
 let qrcode;
 
-document.getElementById('generate').addEventListener('click', () => {
-  const qrText = document.getElementById('qr-text').value.trim();
+const input = document.getElementById('qr-text');
+const generateBtn = document.getElementById('generate');
+const downloadBtn = document.getElementById('download');
+
+function generateQR() {
+  const qrText = input.value.trim();
   if (!qrText) return alert("Please enter text!");
 
-  // Clear previous QR
   document.getElementById('qrcode').innerHTML = "";
 
   qrcode = new QRCode(document.getElementById('qrcode'), {
@@ -16,10 +19,18 @@ document.getElementById('generate').addEventListener('click', () => {
     correctLevel : QRCode.CorrectLevel.H
   });
 
-  document.getElementById('download').style.display = 'inline-block';
+  downloadBtn.style.display = 'inline-block';
+}
+
+generateBtn.addEventListener('click', generateQR);
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    generateQR();
+  }
 });
 
-document.getElementById('download').addEventListener('click', () => {
+downloadBtn.addEventListener('click', () => {
   const img = document.querySelector('#qrcode img');
   if (img) {
     const link = document.createElement('a');
