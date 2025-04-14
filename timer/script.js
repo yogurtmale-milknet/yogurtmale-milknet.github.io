@@ -9,12 +9,12 @@ function formatTime(ms) {
 
 function getRandomAlarmSound() {
   const sounds = [
-    'alarm.mp3',
-    'alarm2.mp3',
-    'alarm3.mp3',
-    'alarm4.mp3',
-    'alarm5.mp3',
-    'alarm6.mp3'
+    'alarm.wav',
+    'alarm2.wav',
+    'alarm3.wav',
+    'alarm4.wav',
+    'alarm5.wav',
+    'alarm6.wav'
   ];
   const randomIndex = Math.floor(Math.random() * sounds.length);
   return sounds[randomIndex];
