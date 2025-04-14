@@ -4,6 +4,14 @@ let money = 1000;  // Starting money
 let level = 1;
 let xp = 0;
 let xpMax = 100;
+let blackjackWins = 0;
+let slotsWins = 0;
+let rouletteWins = 0;
+let horseWins = 0;
+let warWins = 0;
+let coinflipWins = 0;
+let crashWins = 0;
+let kenoWins = 0;
 
 // Load user data from localStorage (if any)
 function loadUserData() {
@@ -15,7 +23,7 @@ function loadUserData() {
     level = parseInt(localStorage.getItem('level')) || level;
     xp = parseInt(localStorage.getItem('xp')) || xp;
     xpMax = parseInt(localStorage.getItem('xpMax')) || xpMax;
-    
+
     // Set the player data on the main menu
     document.getElementById('player-username').textContent = username;
     document.getElementById('player-money').textContent = money;
@@ -23,7 +31,7 @@ function loadUserData() {
     document.getElementById('player-xp').textContent = xp;
     document.getElementById('player-xp-max').textContent = xpMax;
     document.getElementById('xp-progress').style.width = (xp / xpMax) * 100 + '%';
-    
+
     // Save data to localStorage
     localStorage.setItem('username', username);
     localStorage.setItem('money', money);
@@ -88,21 +96,24 @@ function addDailyReward() {
 // Blackjack game logic
 function startBlackjack() {
   const bet = parseInt(document.getElementById('blackjack-bet').value);
-  if (isNaN(bet) || bet <= 0) {
+  if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
   // Blackjack game logic goes here...
   // Update balance after game logic
   money -= bet;
+  blackjackWins++;
   document.getElementById('blackjack-money').textContent = money;
+  document.getElementById('blackjack-result').textContent = `Blackjack Wins: ${blackjackWins}`;
   localStorage.setItem('money', money);
+  localStorage.setItem('blackjackWins', blackjackWins);
 }
 
 // Slots game logic
 function playSlots() {
   const bet = parseInt(document.getElementById('slots-bet').value);
-  if (isNaN(bet) || bet <= 0) {
+  if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
@@ -115,14 +126,17 @@ function playSlots() {
   document.getElementById('slots-reels').innerHTML = `<span class="reel">${reel1}</span><span class="reel">${reel2}</span><span class="reel">${reel3}</span>`;
   // Logic for checking winning and updating balance goes here
   money -= bet;
+  slotsWins++;
   document.getElementById('slots-money').textContent = money;
+  document.getElementById('slots-result').textContent = `Slots Wins: ${slotsWins}`;
   localStorage.setItem('money', money);
+  localStorage.setItem('slotsWins', slotsWins);
 }
 
 // Roulette game logic
 function playRoulette() {
   const bet = parseInt(document.getElementById('roulette-bet').value);
-  if (isNaN(bet) || bet <= 0) {
+  if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
@@ -135,6 +149,7 @@ function playRoulette() {
   if ((choice === 'red' && color === 'red') || (choice === 'black' && color === 'black') || (choice === 'green' && result === 0)) {
     message += ' - You win!';
     money += bet;
+    rouletteWins++;
   } else {
     message += ' - You lose.';
     money -= bet;
@@ -142,12 +157,13 @@ function playRoulette() {
   document.getElementById('roulette-result').textContent = message;
   document.getElementById('roulette-money').textContent = money;
   localStorage.setItem('money', money);
+  localStorage.setItem('rouletteWins', rouletteWins);
 }
 
 // Horse Betting game logic
 function placeHorseBet() {
   const bet = parseInt(document.getElementById('horse-bet').value);
-  if (isNaN(bet) || bet <= 0) {
+  if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
@@ -158,6 +174,7 @@ function placeHorseBet() {
   if (winner === 1) {  // Let's assume betting on Horse 1 wins
     message += ' - You win!';
     money += bet;
+    horseWins++;
   } else {
     message += ' - You lose.';
     money -= bet;
@@ -166,12 +183,13 @@ function placeHorseBet() {
   document.getElementById('horse-result').textContent = message;
   document.getElementById('horse-money').textContent = money;
   localStorage.setItem('money', money);
+  localStorage.setItem('horseWins', horseWins);
 }
 
 // Coin Flip game logic
 function flipCoin() {
   const bet = parseInt(document.getElementById('coinflip-bet').value);
-  if (isNaN(bet) || bet <= 0) {
+  if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
@@ -179,28 +197,30 @@ function flipCoin() {
   document.getElementById('coinflip-result').textContent = `Result: ${result}`;
   // Update balance after coin flip outcome
   money -= bet;
+  coinflipWins++;
   document.getElementById('coinflip-money').textContent = money;
   localStorage.setItem('money', money);
+  localStorage.setItem('coinflipWins', coinflipWins);
 }
 
 // Keno game logic
 function playKeno() {
   const bet = parseInt(document.getElementById('keno-bet').value);
-  if (isNaN(bet) || bet <= 0) {
+  if (isNaN(bet) || bet <= 0 || bet > money) {
     alert('Please enter a valid bet amount.');
     return;
   }
   // Keno logic (random number selection)
   const numbers = [];
   for (let i = 0; i < 5; i++) {
-    numbers.push(Math.floor(Math.random() * 80) + 1);  // 1 to 80
+    numbers.push(Math.floor(Math.random() * 80) + 1);  // Pick 5 numbers from 1 to 80
   }
-  document.getElementById('keno-result').textContent = `Selected Numbers: ${numbers.join(', ')}`;
-  // Update balance based on winnings (example)
+
+  const message = `Your numbers: ${numbers.join(', ')}`;
+  document.getElementById('keno-result').textContent = message;
   money -= bet;
+  kenoWins++;
   document.getElementById('keno-money').textContent = money;
   localStorage.setItem('money', money);
+  localStorage.setItem('kenoWins', kenoWins);
 }
-
-// Add daily reward if applicable
-addDailyReward();
