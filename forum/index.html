@@ -7,31 +7,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MilkNet Forum</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.2/dist/index.min.js"></script>
 </head>
 <body>
-  <header>
+  <div class="auth-container">
     <h1>MilkNet Forum</h1>
-  </header>
 
-  <div id="new-thread">
-    <h2>New Thread</h2>
-    <input type="text" id="thread-title" placeholder="Thread Title"><br>
-    <div class="emoji-wrap">
-      <textarea id="thread-content" placeholder="Post content..."></textarea>
-      <button class="emoji-button" data-target="thread-content">😊</button>
+    <!-- Forum Post Section -->
+    <div id="new-thread">
+      <textarea id="post-content" placeholder="Write your post..."></textarea>
+      <input type="file" id="image-upload" accept="image/*">
+      <button onclick="uploadImage()">Upload Image</button>
+      <button onclick="submitPost()">Submit Post</button>
     </div>
-    <input type="file" id="thread-image"><br>
-    <button onclick="createThread()">Post</button>
+    
+    <hr>
+
+    <!-- Login/Registration Section -->
+    <div class="auth-container">
+      <h2>Already a member?</h2>
+      <input type="text" id="login-username" placeholder="Username"><br>
+      <input type="password" id="login-password" placeholder="Password"><br>
+      <button onclick="login()">Login</button>
+    </div>
+
   </div>
-
-  <hr>
-
-  <div id="threads"></div>
 
   <script src="script.js"></script>
 </body>
