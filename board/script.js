@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Generate a random username in the format 'milkenjoyer[###]'
     function generateRandomUsername() {
-        const randomNum = Math.floor(Math.random() * 1000);  // Random number between 0 and 999
-        return `milkenjoyer[${randomNum.toString().padStart(3, '0')}]`;  // Ensure it has 3 digits
+        const randomNum = Math.floor(Math.random() * 1000);  
+        return `milkenjoyer[${randomNum.toString().padStart(3, '0')}]`;  
     }
 
     // Check if username is already saved in localStorage
