@@ -76,3 +76,22 @@ input, button {
   font-size: 1.2em;
   cursor: pointer;
 }
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #eee;
+  border: none;
+  border-radius: 5px;
+  color: black;
+}
