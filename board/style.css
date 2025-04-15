@@ -1,25 +1,28 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background: linear-gradient(to right, black, #1e3a8a); /* Black to Blue gradient */
+    color: white; /* Set text color to white */
 }
 
 .container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
     text-align: center;
+    color: white;
 }
 
 #user-info {
     text-align: right;
+    color: white;
 }
 
 #post-form {
@@ -36,6 +39,8 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-bottom: 10px;
+    background-color: #333;
+    color: white;
 }
 
 button {
@@ -57,8 +62,10 @@ button:hover {
 
 .post {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #444;
     margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for posts */
+    border-radius: 5px;
 }
 
 .post .username {
