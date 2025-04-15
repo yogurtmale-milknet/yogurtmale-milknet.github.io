@@ -10,4 +10,4 @@ x.milk-uv-three.great-site-net
 y.milk-uv-two.infinityfreeapp.com
 z.milk-uv-one.free.nf
 
-More can be created on request. Alternatively, fork github.com/tf7software/UV-Static and deploy it on GitHub Pages using a subdomain from infinityfree.com (last part is optional). Something like meepling4.github.io/search will NOT work as it needs to be deployed on root
+More can be created on request. Alternatively, fork github.com/tf7software/UV-Static and deploy it on GitHub Pages using a subdomain from infinityfree.com. Something like meepling4.github.io/search will NOT work as it needs to be deployed on root, but meepling4.github.io will work.
