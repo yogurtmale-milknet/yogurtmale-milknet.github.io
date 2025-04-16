@@ -8,5 +8,7 @@
 milk.servemp3.com
 get.milknet.ct.ws
 account.frontierbroadband.66ghz.com
+milk.fsky.io
+milk.everypizza.im
 
 Currently MilkNet cannot be deployed since most of the assets are hosted on separate repositories. If you need another link set up, let me know.
