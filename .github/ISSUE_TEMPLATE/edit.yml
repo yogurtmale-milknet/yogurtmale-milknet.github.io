@@ -2,10 +2,23 @@ name: Edit
 description: Request to edit/fix link
 title: 'Edit: '
 labels: ['Edit']
-
+body:
+  - type: input
+    attributes:
+      label: Name
+      description: Name of what you want to edit
+      placeholder: 'https://mangos.arpa/chatgpt.html'
+      required: true
 body:
   - type: input
     attributes:
       label: New URL
-      description: New link for what is broken
-      placeholder: 'https://mangos.arpa/chatgpt.html'
+      description: New link/repo
+      placeholder: 'https://mangos.arpa/chatgpt.html
+
+body:
+  - type: input
+    attributes:
+      label: Any other info
+      description: Comments or stuff you want to add
+      placeholder: 'bla bla bla ble ble'
