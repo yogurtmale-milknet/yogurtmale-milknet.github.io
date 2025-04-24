@@ -1,0 +1,12 @@
+name: Question / Comment
+description: What the name says
+title: ''
+labels: ['Question / Comment']
+
+body:
+  - type: input
+    attributes:
+      label: Name
+      placeholder: 'helo when are you please skid ultra violin pelase'
+    validations:
+      required: true
