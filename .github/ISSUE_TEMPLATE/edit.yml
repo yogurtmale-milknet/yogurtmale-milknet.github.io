@@ -5,14 +5,6 @@ labels: ['Edit']
 body:
   - type: input
     attributes:
-      label: Name & info
-      description: Name of what you want to edit and any comments
-      placeholder: 'https://mangos.arpa/chatgpt.html'
-      required: true
-
-body:
-  - type: input
-    attributes:
       label: New URL
       description: New link/repo
       placeholder: 'https://mangos.arpa/chatgpt.html'
