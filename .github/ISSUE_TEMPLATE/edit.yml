@@ -9,6 +9,7 @@ body:
       description: Name of what you want to edit and any comments
       placeholder: 'https://mangos.arpa/chatgpt.html'
       required: true
+
 body:
   - type: input
     attributes:
