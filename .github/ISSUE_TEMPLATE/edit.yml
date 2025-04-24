@@ -15,4 +15,4 @@ body:
     attributes:
       label: New URL
       description: New link/repo
-      placeholder: 'https://mangos.arpa/chatgpt.html
+      placeholder: 'https://mangos.arpa/chatgpt.html'
