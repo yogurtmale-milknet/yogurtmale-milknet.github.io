@@ -39,7 +39,7 @@ const texts = [
     "frimp tomorrow forever popsicle evangelion humanity crystals",
     "instead of drinking imported beers somebody brought a bottle of orphan tears",
     "this mailbox is mine and this triagonal sign",
-    "milknet glaze i am milknet by playboi milky",
+    "milkyway glaze i am milkyway by playboi milky",
     "limbo by mindcap and more",
     "github lotus flower chinese bottom ninety",
     "i told her i'm big like bieber she ain't believe me",

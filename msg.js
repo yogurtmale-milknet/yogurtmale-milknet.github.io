@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", function() {
         "NEVER GOON",
         "5,000 visits and I drop my Adobe Enterprise login",
         "I'm Tim Cheese, and I killed John Pork. And this is my story. That day. The day I snuck up behind John. You all think you know the story. You don't",
-        "I am steve aggressive phonk gaming remix wait wrong tab"
+        "I am steve aggressive phonk gaming remix wait wrong tab",
+        "GeoGebra ToS trick working 2023 those who know",
+        "Shoutout to everypizza.im for being british",
+        "Voxel is eating a chicken sandwich come back later",
+        "The Ultraviolet devs tried to sell my cousin vitamin gummies"
     ];
 
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
@@ -19,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     messageElement.textContent = randomMessage;
     messageElement.style.opacity = 0;
     messageElement.style.transform = "translateY(20px)";
-    messageElement.style.transition = "opacity 1.5s ease, transform 1.5s ease";
+    messageElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
 
     setTimeout(() => {
         messageElement.style.opacity = 1;

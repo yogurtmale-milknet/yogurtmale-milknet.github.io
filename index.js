@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("keydown", function(event) {
         if (event.key === ",") {
             if (!savedLink) {
-                savedLink = prompt("Escape to: https://YOURLINK.tld");
+                savedLink = prompt("Escape to:");
                 if (savedLink) {
                     localStorage.setItem("savedLink", savedLink);
                 }
@@ -29,7 +29,7 @@ document.addEventListener("keydown", function (event) {
             s: { title: "Schoology", icon: "/assets/img/schoology.ico" },
             d: { title: "Desmos | Scientific Calculator", icon: "/assets/img/desmos.ico" },
             cmg: { title: "Cool Math Games - Free Online Games for Learning and Fun", icon: "/assets/img/coolmathgames.ico" },
-            i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" },
+            i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" }
         };
 
         if (options[choice]) {
