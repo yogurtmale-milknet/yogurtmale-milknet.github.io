@@ -37,6 +37,11 @@ a:hover {
   filter: drop-shadow(0 0 10px white);
 }
 
+h1 {
+  text-shadow: 0 0 10px black, 0 0 20px black, 0 0 30px black;
+}
+
+
 img {
   display: block;
   margin-left: auto;
