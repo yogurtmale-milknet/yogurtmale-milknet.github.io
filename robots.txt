@@ -1,5 +1,3 @@
-Sitemap: https://milk.servemp3.com/sitemap.xml
-
 User-agent: SemrushBot
 Disallow: /
 
