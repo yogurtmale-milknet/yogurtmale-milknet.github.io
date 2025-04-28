@@ -17,16 +17,25 @@ document.addEventListener("DOMContentLoaded", function() {
         "The Ultraviolet devs tried to sell my cousin vitamin gummies"
     ];
 
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     const messageElement = document.getElementById("random-message");
 
-    messageElement.textContent = randomMessage;
-    messageElement.style.opacity = 0;
-    messageElement.style.transform = "translateY(20px)";
-    messageElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    function showRandomMessage() {
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        messageElement.style.opacity = 0;
+        messageElement.style.transform = "translateY(20px)";
+        messageElement.style.textShadow = "none"; // reset shadow
+        setTimeout(() => {
+            messageElement.textContent = randomMessage;
+            messageElement.style.opacity = 1;
+            messageElement.style.transform = "translateY(0)";
+            messageElement.style.textShadow = "0 0 8px white"; // apply glow
+            setTimeout(() => {
+                messageElement.style.textShadow = "none"; // remove
+            }, 600); // glow duration
+        }, 200); // fade timing
+    }
 
-    setTimeout(() => {
-        messageElement.style.opacity = 1;
-        messageElement.style.transform = "translateY(0)";
-    }, 100);
+    messageElement.style.transition = "opacity 0.4s ease, transform 0.4s ease, text-shadow 0.6s ease";
+    showRandomMessage();
+    setInterval(showRandomMessage, 6000);
 });
