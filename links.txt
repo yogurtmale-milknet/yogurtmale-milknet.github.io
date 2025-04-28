@@ -34,10 +34,9 @@
                                                                    :::::::::::      :::::           
                                                                           :::::::::::::             
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-milk.servemp3.com
+milkyway.servequake.com
 get.milknet.ct.ws
 account.frontierbroadband.66ghz.com
-milk.fsky.io
 milk.everypizza.im
 
 Currently MilkyWay cannot be deployed since most of the assets are hosted on separate repositories. If you need another link set up, let me know.
