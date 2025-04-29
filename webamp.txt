@@ -45,4 +45,4 @@ winampheritage.com/skins
 winampskins.info
 winaero.com/category/file-archive/download-winamp-skins
 pling.com/browse?cat=129
-github.com/milk-net/music/blob/main/skins
+github.com/milkywaynetwork/music/blob/main/skins
