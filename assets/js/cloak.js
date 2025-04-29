@@ -1,20 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let savedLink = localStorage.getItem("savedLink");
-
-    document.addEventListener("keydown", function(event) {
-        if (event.key === ",") {
-            if (!savedLink) {
-                savedLink = prompt("Escape to:");
-                if (savedLink) {
-                    localStorage.setItem("savedLink", savedLink);
-                }
-            } else {
-                window.open(savedLink, "_blank");
-            }
-        }
-    });
-});
-
 document.addEventListener("keydown", function (event) {
     if (event.key === ".") {
         let choice = prompt("CLOAK OPTIONS: Google Drive (enter g), Google Classroom (enter gc), Google Docs (enter gd), Clever (enter c), PowerSchool (enter p), Khan Academy (enter k), Desmos (enter d), Schoology (enter s), Cool Math Games (enter cmg)");
