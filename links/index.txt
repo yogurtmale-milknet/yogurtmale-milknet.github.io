@@ -40,3 +40,5 @@ account.frontierbroadband.66ghz.com
 milk.everypizza.im
 
 Currently MilkyWay cannot be deployed since most of the assets are hosted on separate repositories. If you need another link set up, let me know.
+
+bit.ly/milkywaygames
