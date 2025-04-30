@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MilkyWay | CPS Test</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom right, #4b0082, #000000);
+      background-attachment: fixed;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      max-width: 400px;
+    }
+
+    h1, p, label {
+      text-shadow: 0 0 8px black, 0 0 16px black;
+    }
+
+    .time-options {
+      margin: 10px 0;
+    }
+
+    .time-btn {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-shadow: 0 0 6px black;
+    }
+
+    .time-btn:hover {
+      background-color: #333;
+    }
+
+    #custom-time {
+      padding: 6px;
+      border-radius: 6px;
+      border: none;
+      width: 100px;
+      margin-top: 8px;
+      background-color: black;
+      color: white;
+      text-shadow: none;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #click-button {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(to bottom right, #6a0dad, #000000);
+      margin: 20px auto;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    #click-button:active {
+      transform: scale(0.95);
+    }
+
+    #countdown {
+      font-size: 20px;
+      margin: 10px 0;
+      text-shadow: 0 0 8px black, 0 0 16px black;
+      min-height: 36px;
+    }
+
+    #view-history, #close-history {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #6a0dad;
+      color: white;
+      cursor: pointer;
+      text-shadow: 0 0 6px black;
+    }
+
+    #history-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    #history-content {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      max-height: 80%;
+      overflow-y: auto;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .history-entry {
+      margin: 4px 0;
+      text-shadow: 0 0 6px black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CPS Test</h1>
+    <div class="time-options">
+      <button class="time-btn" onclick="setTime(1)">1s</button>
+      <button class="time-btn" onclick="setTime(5)">5s</button>
+      <button class="time-btn" onclick="setTime(10)">10s</button>
+      <button class="time-btn" onclick="setTime(15)">15s</button>
+      <button class="time-btn" onclick="setTime(20)">20s</button>
+      <button class="time-btn" onclick="setTime(60)">60s</button><br>
+      <input type="number" id="custom-time" placeholder="Custom (s)" min="1" onchange="setCustomTime(this.value)" />
+    </div>
+    <div id="countdown"></div>
+    <button id="click-button" onclick="registerClick()"></button>
+    <p id="clicks">Clicks: 0</p>
+    <p id="cps">CPS: 0</p>
+    <p id="highscore">High Score: 0 CPS</p>
+    <label>
+      <input type="checkbox" id="auto-restart" checked />
+      Auto-Restart
+    </label><br>
+    <button id="view-history" onclick="showHistory()">View History</button>
+  </div>
+
+  <div id="history-modal">
+    <div id="history-content">
+      <h2>High Score History</h2>
+      <div id="history-list"></div>
+      <button id="close-history" onclick="hideHistory()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    let time = 0;
+    let interval;
+    let countdownInterval;
+    let clicks = 0;
+    let startTime;
+    let isRunning = false;
+
+    function setTime(seconds) {
+      if (isRunning) return;
+      time = parseInt(seconds);
+      startCountdown();
+    }
+
+    function setCustomTime(value) {
+      if (isRunning) return;
+      const val = parseInt(value);
+      if (val > 0) setTime(val);
+    }
+
+    function startCountdown() {
+      document.getElementById('countdown').textContent = 'Starting in 3...';
+      let count = 3;
+      countdownInterval = setInterval(() => {
+        count--;
+        if (count === 0) {
+          clearInterval(countdownInterval);
+          document.getElementById('countdown').textContent = 'Go';
+          setTimeout(() => {
+            document.getElementById('countdown').textContent = '';
+            startTest();
+          }, 500);
+        } else {
+          document.getElementById('countdown').textContent = `Starting in ${count}...`;
+        }
+      }, 1000);
+    }
+
+    function startTest() {
+      clicks = 0;
+      updateDisplay();
+      isRunning = true;
+      startTime = Date.now();
+      interval = setTimeout(endTest, time * 1000);
+    }
+
+    function endTest() {
+      isRunning = false;
+      const elapsed = (Date.now() - startTime) / 1000;
+      const cps = (clicks / elapsed).toFixed(2);
+      document.getElementById('cps').textContent = `CPS: ${cps}`;
+      updateHighScore(cps);
+      if (document.getElementById('auto-restart').checked) {
+        startCountdown();
+      } else {
+        document.getElementById('countdown').textContent = 'Test complete!';
+      }
+    }
+
+    function registerClick() {
+      if (!isRunning) return;
+      clicks++;
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('clicks').textContent = `Clicks: ${clicks}`;
+    }
+
+    function updateHighScore(cps) {
+      const stored = parseFloat(localStorage.getItem('highscore')) || 0;
+      if (cps > stored) {
+        localStorage.setItem('highscore', cps);
+        updateHistory(cps);
+      }
+      document.getElementById('highscore').textContent = `High Score: ${Math.max(cps, stored)} CPS`;
+    }
+
+    function updateHistory(cps) {
+      let history = JSON.parse(localStorage.getItem('history') || '[]');
+      history.unshift({ score: cps, time: new Date().toLocaleString() });
+      localStorage.setItem('history', JSON.stringify(history.slice(0, 10)));
+    }
+
+    function showHistory() {
+      const history = JSON.parse(localStorage.getItem('history') || '[]');
+      const list = document.getElementById('history-list');
+      list.innerHTML = history.length
+        ? history.map(h => `<div class='history-entry'>${h.time} — ${h.score} CPS</div>`).join('')
+        : 'No history yet.';
+      document.getElementById('history-modal').style.display = 'flex';
+    }
+
+    function hideHistory() {
+      document.getElementById('history-modal').style.display = 'none';
+    }
+
+    window.onload = () => {
+      const score = parseFloat(localStorage.getItem('highscore')) || 0;
+      document.getElementById('highscore').textContent = `High Score: ${score} CPS`;
+      document.getElementById('countdown').textContent = '';
+    };
+  </script>
+</body>
+</html>
