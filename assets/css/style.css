@@ -67,7 +67,3 @@ footer {
   padding: 16px;
   margin-top: auto;
 }
-
-#random-message {
-  transition: opacity 1.2s ease, transform 1.2s ease;
-}
