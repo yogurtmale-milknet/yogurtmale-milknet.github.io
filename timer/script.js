@@ -14,7 +14,10 @@ function getRandomAlarmSound() {
     'alarm3.wav',
     'alarm4.wav',
     'alarm5.wav',
-    'alarm6.wav'
+    'alarm6.wav',
+    'alarm7.wav',
+    'alarm8.wav',
+    'alarm9.wav'
   ];
   const randomIndex = Math.floor(Math.random() * sounds.length);
   return sounds[randomIndex];
@@ -37,7 +40,7 @@ function setAlarm() {
   const totalMs = (minutes * 60 + seconds) * 1000;
 
   if (totalMs <= 0) {
-    alert("Please enter a time greater than 0.");
+    alert("Enter a time greater than 0 idiot.");
     return;
   }
 
