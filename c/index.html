@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MilkyWay | Casino</title>
+    <link id="favicon" rel="icon" href="/assets/img/milkyway.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="/assets/js/escape.js"></script>
+    <script src="/assets/js/cloak.js"></script>
+</head>
+<body>
+<div id="export-import-buttons">
+    <button onclick="exportBalance()">Export Balance</button>
+    <input type="file" id="import-file" accept=".json" onchange="importBalance()" hidden>
+    <button onclick="document.getElementById('import-file').click()">Import Balance</button>
+</div>
+    <h1>MilkyWay Casino</h1>
+    <p>Feeling lucky? Inspired by github.com/Xameren/Casino (Also no you don't actually win money loser)</p>
+    <p id="balance">Balance: $1,000</p>
+
+    <label for="bet-amount">Bet:</label>
+    <input type="number" id="bet-amount" value="100">
+
+    <div>
+        <button onclick="showGame('horse-racing')">Horse Racing</button>
+        <button onclick="showGame('blackjack')">Blackjack</button>
+        <button onclick="showGame('slots')">Slots</button>
+        <button onclick="showGame('coin-flip')">Coin Flip</button>
+    </div>
+
+    <div id="horse-racing" class="game" style="display:none;">
+        <h2>Horse Racing</h2>
+        <label for="horse-selection">Choose your horse:</label>
+        <select id="horse-selection">
+            <option value="Horse 1">Horse 1</option>
+            <option value="Horse 2">Horse 2</option>
+            <option value="Horse 3">Horse 3</option>
+            <option value="Horse 4">Horse 4</option>
+        </select>
+        <button onclick="startHorseRacing()">Start Race</button>
+        <p id="race-result"></p>
+    </div>
+
+    <div id="blackjack" class="game" style="display:none;">
+        <h2>Blackjack</h2>
+        <button onclick="startBlackjack()">Start Game</button>
+        <button onclick="hit()">Hit</button>
+        <button onclick="stand()">Stand</button>
+        <p id="blackjack-cards"></p>
+        <p id="blackjack-status"></p>
+    </div>
+
+    <div id="slots" class="game" style="display:none;">
+        <h2>Slots</h2>
+        <button onclick="playSlots()">Spin</button>
+        <p id="slots-result"></p>
+    </div>
+
+    <div id="coin-flip" class="game" style="display:none;">
+        <h2>Coin Flip</h2>
+        <label for="coin-choice">Choose:</label>
+        <select id="coin-choice">
+            <option value="Heads">Heads</option>
+            <option value="Tails">Tails</option>
+        </select>
+        <button onclick="flipCoin()">Flip Coin</button>
+        <p id="coin-flip-result"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
