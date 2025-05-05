@@ -1,8 +1,9 @@
 let balance = 1000;
+const MAX_BALANCE = 1_000_000_000_000_000;
 
 // Update balance display
 function updateBalance() {
-    document.getElementById('balance').innerText = `Balance: $${balance}`;
+    document.getElementById('balance').innerText = `Balance: $${balance.toLocaleString()}`;
 }
 
 // Show selected game
@@ -15,15 +16,29 @@ function showGame(gameId) {
 // Get bet amount
 function getBetAmount() {
     const bet = parseInt(document.getElementById('bet-amount').value);
+    if (isNaN(bet) || bet <= 0) {
+        alert("Please enter a valid bet amount.");
+        return null;
+    }
     if (bet > balance) {
         alert("You don't have enough balance for this bet.");
         return null;
     }
-    if (bet <= 0) {
-        alert("Please enter a valid bet amount.");
-        return null;
-    }
     return bet;
+}
+
+// Balance management
+function addBalance(amount) {
+    if (balance + amount >= MAX_BALANCE) {
+        balance = MAX_BALANCE;
+        alert("You've reached the maximum balance of $1 Quadrillion!");
+    } else {
+        balance += amount;
+    }
+}
+
+function subtractBalance(amount) {
+    balance -= amount;
 }
 
 // Horse Racing Game
@@ -38,10 +53,10 @@ function startHorseRacing() {
     let resultMessage = `You bet on ${playerHorse}. ${winner} wins the race! `;
 
     if (playerHorse === winner) {
-        balance += bet;
+        addBalance(bet);
         resultMessage += `You win $${bet}!`;
     } else {
-        balance -= bet;
+        subtractBalance(bet);
         resultMessage += `You lose $${bet}.`;
     }
 
@@ -108,10 +123,10 @@ function endBlackjackGame(result) {
 
     let message = '';
     if (result === 'win') {
-        balance += bet;
+        addBalance(bet);
         message = `You win $${bet}!`;
     } else if (result === 'lose') {
-        balance -= bet;
+        subtractBalance(bet);
         message = `You lose $${bet}.`;
     } else {
         message = "It's a draw!";
@@ -132,13 +147,15 @@ function playSlots() {
 
     let resultMessage = `Result: ${spin.join(' ')}`;
     if (spin.every(s => s === spin[0])) {
-        balance += bet * 5;
-        resultMessage += `\nJackpot! You win $${bet * 5}!`;
+        const winnings = bet * 5;
+        addBalance(winnings);
+        resultMessage += `\nJackpot! You win $${winnings}!`;
     } else if (new Set(spin).size === 2) {
-        balance += bet * 2;
-        resultMessage += `\nTwo of a kind! You win $${bet * 2}!`;
+        const winnings = bet * 2;
+        addBalance(winnings);
+        resultMessage += `\nTwo of a kind! You win $${winnings}!`;
     } else {
-        balance -= bet;
+        subtractBalance(bet);
         resultMessage += `\nYou lose $${bet}.`;
     }
 
@@ -162,13 +179,51 @@ function flipCoin() {
     let resultMessage = `You chose ${playerChoice}. The coin landed on ${result}. `;
 
     if (playerChoice === result) {
-        balance += bet;
+        addBalance(bet);
         resultMessage += `You win $${bet}!`;
     } else {
-        balance -= bet;
+        subtractBalance(bet);
         resultMessage += `You lose $${bet}.`;
     }
 
     document.getElementById('coin-flip-result').innerText = resultMessage;
     updateBalance();
+}
+
+// Export Balance
+function exportBalance() {
+    const data = { balance };
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'balance.json';
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+// Import Balance
+function importBalance() {
+    const fileInput = document.getElementById('import-file');
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (typeof data.balance === 'number') {
+                balance = Math.min(data.balance, MAX_BALANCE);
+                updateBalance();
+                alert("Balance imported successfully!");
+            } else {
+                alert("Invalid file format.");
+            }
+        } catch (err) {
+            alert("Error reading file.");
+        }
+    };
+    reader.readAsText(file);
 }
