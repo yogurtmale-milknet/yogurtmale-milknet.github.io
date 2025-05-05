@@ -1,6 +1,12 @@
 let balance = 1000;
 const MAX_BALANCE = 1_000_000_000_000_000;
 
+// Blackjack state
+let playerCards = [];
+let dealerCards = [];
+let blackjackBet = 0;
+let blackjackEnded = true;
+
 // Update balance display
 function updateBalance() {
     document.getElementById('balance').innerText = `Balance: $${balance.toLocaleString()}`;
@@ -17,11 +23,11 @@ function showGame(gameId) {
 function getBetAmount() {
     const bet = parseInt(document.getElementById('bet-amount').value);
     if (isNaN(bet) || bet <= 0) {
-        alert("Please enter a valid bet amount.");
+        alert("Please enter a valid amount.");
         return null;
     }
     if (bet > balance) {
-        alert("You don't have enough balance for this bet.");
+        alert("Sorry Link, I can't let you. Come back when you're a little, mmm.... richer.");
         return null;
     }
     return bet;
@@ -31,7 +37,7 @@ function getBetAmount() {
 function addBalance(amount) {
     if (balance + amount >= MAX_BALANCE) {
         balance = MAX_BALANCE;
-        alert("You've reached the maximum balance of $1 Quadrillion!");
+        alert("You've reached the maximum balance of $1 Quadrillion! Nice job sweat!");
     } else {
         balance += amount;
     }
@@ -65,12 +71,12 @@ function startHorseRacing() {
 }
 
 // Blackjack Game
-let playerCards = [];
-let dealerCards = [];
-
 function startBlackjack() {
     const bet = getBetAmount();
     if (bet === null) return;
+
+    blackjackBet = bet;
+    blackjackEnded = false;
 
     playerCards = [drawCard(), drawCard()];
     dealerCards = [drawCard(), drawCard()];
@@ -94,6 +100,8 @@ function showBlackjackCards() {
 }
 
 function hit() {
+    if (blackjackEnded) return;
+
     playerCards.push(drawCard());
     showBlackjackCards();
     const total = calculateTotal(playerCards);
@@ -101,6 +109,8 @@ function hit() {
 }
 
 function stand() {
+    if (blackjackEnded) return;
+
     while (calculateTotal(dealerCards) < 17) {
         dealerCards.push(drawCard());
     }
@@ -118,16 +128,16 @@ function stand() {
 }
 
 function endBlackjackGame(result) {
-    const bet = getBetAmount();
-    if (bet === null) return;
+    if (blackjackEnded) return;
+    blackjackEnded = true;
 
     let message = '';
     if (result === 'win') {
-        addBalance(bet);
-        message = `You win $${bet}!`;
+        addBalance(blackjackBet);
+        message = `You win $${blackjackBet}!`;
     } else if (result === 'lose') {
-        subtractBalance(bet);
-        message = `You lose $${bet}.`;
+        subtractBalance(blackjackBet);
+        message = `You lose $${blackjackBet}.`;
     } else {
         message = "It's a draw!";
     }
@@ -217,7 +227,7 @@ function importBalance() {
             if (typeof data.balance === 'number') {
                 balance = Math.min(data.balance, MAX_BALANCE);
                 updateBalance();
-                alert("Balance imported successfully!");
+                alert("Balance imported!");
             } else {
                 alert("Invalid file format.");
             }
