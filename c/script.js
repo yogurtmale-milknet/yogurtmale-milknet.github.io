@@ -1,21 +1,25 @@
 let balance = 1000;
 const MAX_BALANCE = 1_000_000_000_000_000;
 
+// Blackjack state
 let playerCards = [];
 let dealerCards = [];
 let blackjackBet = 0;
 let blackjackEnded = true;
 
+// Update balance display
 function updateBalance() {
     document.getElementById('balance').innerText = `Balance: $${balance.toLocaleString()}`;
 }
 
+// Show selected game
 function showGame(gameId) {
     const games = document.querySelectorAll('.game');
     games.forEach(game => game.style.display = 'none');
     document.getElementById(gameId).style.display = 'block';
 }
 
+// Get bet amount
 function getBetAmount() {
     const bet = parseInt(document.getElementById('bet-amount').value);
     if (isNaN(bet) || bet <= 0) {
@@ -29,10 +33,11 @@ function getBetAmount() {
     return bet;
 }
 
+// Balance management
 function addBalance(amount) {
     if (balance + amount >= MAX_BALANCE) {
         balance = MAX_BALANCE;
-        alert("You've reached the maximum balance: $1 Quadrillion! Nice job sweat!");
+        alert("You've reached the maximum balance of $1 Quadrillion! Nice job sweat!");
     } else {
         balance += amount;
     }
@@ -42,6 +47,7 @@ function subtractBalance(amount) {
     balance -= amount;
 }
 
+// Horse Racing Game
 function startHorseRacing() {
     const bet = getBetAmount();
     if (bet === null) return;
@@ -64,6 +70,7 @@ function startHorseRacing() {
     updateBalance();
 }
 
+// Blackjack Game
 function startBlackjack() {
     const bet = getBetAmount();
     if (bet === null) return;
@@ -140,6 +147,7 @@ function endBlackjackGame(result) {
         `${message} Dealer's cards: ${dealerCards.join(', ')} (Total: ${calculateTotal(dealerCards)})`;
 }
 
+// Slots Game
 function playSlots() {
     const bet = getBetAmount();
     if (bet === null) return;
@@ -169,6 +177,7 @@ function randomSymbol(symbols) {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
+// Coin Flip Game
 function flipCoin() {
     const bet = getBetAmount();
     if (bet === null) return;
@@ -191,6 +200,7 @@ function flipCoin() {
     updateBalance();
 }
 
+// Export Balance
 function exportBalance() {
     const data = { balance };
     const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
@@ -204,6 +214,7 @@ function exportBalance() {
     URL.revokeObjectURL(url);
 }
 
+// Import Balance
 function importBalance() {
     const fileInput = document.getElementById('import-file');
     const file = fileInput.files[0];
