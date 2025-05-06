@@ -44,16 +44,14 @@ function subtractBalance(amount) {
 }
 
 // Passive income generator
-function startCompanyInterval() {
-    if (companyInterval) return;
-
-    companyInterval = setInterval(() => {
-        const companyIncome = 100 * companiesOwned;
-        const restaurantIncome = 1000 * restaurantsOwned;
-        addBalance(companyIncome + restaurantIncome);
+setInterval(() => {
+    const totalIncome = companiesOwned * 100 + restaurantsOwned * 1000 + hotelsOwned * 20000;
+    if (totalIncome > 0) {
+        addBalance(totalIncome);
         updateBalance();
-    }, 1000);
-}
+    }
+}, 1000);
+
 
 // Purchases
 function buyCompany() {
@@ -88,11 +86,23 @@ function buyRestaurant() {
     startCompanyInterval();
 }
 
+function buyHotel() {
+    const cost = 150000;
+    if (balance >= cost) {
+        subtractBalance(cost);
+        hotelsOwned++;
+        updateBalance();
+        alert("You bought a Hotel! Generates $20,000/second.");
+    } else {
+        alert("Not enough balance to buy a Hotel.");
+    }
+}
+
 function updateBusinessesDisplay() {
     const info = document.getElementById('company-info');
     if (info) {
-        const income = (companiesOwned * 100) + (restaurantsOwned * 1000);
-        info.innerText = `Companies Owned: ${companiesOwned} | Restaurants Owned: ${restaurantsOwned} | Income: $${income}/sec`;
+        const income = (companiesOwned * 100) + (restaurantsOwned * 1000) + (hotelsOwned * 20000);
+        info.innerText = `Companies Owned: ${companiesOwned} | Restaurants Owned: ${restaurantsOwned} | Hotels Owned: ${hotelsOwned} Income: $${income}/sec`;
     }
 }
 
