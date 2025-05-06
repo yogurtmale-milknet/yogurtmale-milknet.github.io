@@ -99,6 +99,8 @@ function updateBusinessesDisplay() {
 // Blackjack Game
 let playerCards = [];
 let dealerCards = [];
+let blackjackGameActive = false;
+let currentBet = 0;
 
 function startBlackjack() {
     const bet = getBetAmount();
@@ -106,6 +108,8 @@ function startBlackjack() {
 
     playerCards = [drawCard(), drawCard()];
     dealerCards = [drawCard(), drawCard()];
+    currentBet = bet;
+    blackjackGameActive = true;
 
     document.getElementById('blackjack-status').innerText = 'Game started. Your move!';
     showBlackjackCards();
@@ -126,13 +130,20 @@ function showBlackjackCards() {
 }
 
 function hit() {
+    if (!blackjackGameActive) return;
+
     playerCards.push(drawCard());
     showBlackjackCards();
+
     const total = calculateTotal(playerCards);
-    if (total > 21) endBlackjackGame('lose');
+    if (total > 21) {
+        endBlackjackGame('lose');
+    }
 }
 
 function stand() {
+    if (!blackjackGameActive) return;
+
     while (calculateTotal(dealerCards) < 17) {
         dealerCards.push(drawCard());
     }
@@ -150,20 +161,20 @@ function stand() {
 }
 
 function endBlackjackGame(result) {
-    const bet = getBetAmount();
-    if (bet === null) return;
+    if (!blackjackGameActive) return;
 
     let message = '';
     if (result === 'win') {
-        addBalance(bet);
-        message = `You win $${bet}!`;
+        addBalance(currentBet);
+        message = `You win $${currentBet}!`;
     } else if (result === 'lose') {
-        subtractBalance(bet);
-        message = `You lose $${bet}.`;
+        subtractBalance(currentBet);
+        message = `You lose $${currentBet}.`;
     } else {
         message = "It's a draw!";
     }
 
+    blackjackGameActive = false;
     updateBalance();
     document.getElementById('blackjack-status').innerText =
         `${message} Dealer's cards: ${dealerCards.join(', ')} (Total: ${calculateTotal(dealerCards)})`;
