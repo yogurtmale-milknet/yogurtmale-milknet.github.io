@@ -36,4 +36,6 @@ Because of how Forkphorus works you and your friends need to be on the same link
 
 Link: add /assets/games/amongus/privateserver to the link you're on (like ca.resources.totalh.net/assets/games/amongus/privateserver)
 
+Add &username=(YOUR NAME GOES HERE) add the end of the link once you get redirected and remove the parentheses to set your username
+
 bit.ly/milkywaygg
