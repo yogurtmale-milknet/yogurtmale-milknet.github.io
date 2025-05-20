@@ -4,15 +4,16 @@
 		<meta charset="utf-8" />
 		<title>MilkyWay | Webamp</title>
 		<link id="favicon" rel="icon" href="/assets/img/milkyway.png" type="image/x-icon">
-                <script src="/index.js"></script>
+        <script src="/assets/js/cloak.js"></script>
+		<script src="/assets/js/escape.js"></script>
 		<style>body{background-color:#000000}</style>
 	</head>
 
 	<body>
 	<div id="app" style="height: 100vh"></div>
-	<script src="/music/webamp.bundle.min.js"></script>
-	<script src="/music/butterchurn.min.js"></script>
-	<script src="/music/butterchurnPresets.min.js"></script>
+	<script src="webamp.bundle.min.js"></script>
+	<script src="butterchurn.min.js"></script>
+	<script src="butterchurnPresets.min.js"></script>
 	<script>
 		const Webamp = window.Webamp;
 		const webamp = new Webamp({
