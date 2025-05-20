@@ -34,6 +34,6 @@
 
 Because of how Forkphorus works you and your friends need to be on the same link to be able to join each other's games. Downloading the file and trying to play offline will also not work. There's nothing I can do about this so just make sure 🥶
 
-Link: add /amongus/privateserver to the link you're on (like ca.resources.totalh.net/amongus/privateserver)
+Link: add /assets/games/amongus/privateserver to the link you're on (like ca.resources.totalh.net/assets/games/amongus/privateserver)
 
-bit.ly/milkyway0
+bit.ly/milkywaygg
