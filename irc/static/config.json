@@ -1,0 +1,28 @@
+{
+    "windowTitle": "KiwiIRC",
+    "startupScreen": "welcome",
+    "restricted": true,
+    "theme": "Default",
+    "useMonospace": true,
+    "themes": [
+        { "name": "Default", "url": "static/themes/default" },      
+        { "name": "Dark", "url": "static/themes/nightswatch" }
+    ],
+    "startupOptions" : {
+        "greetingText": "telepath.im IRC",
+        "websocket": "wss://ircws.telepath.im/",
+        "channel": "#milknet",
+        "nick": "milky-?"
+    },
+    "ircFramework": {
+        "auto_reconnect": true,
+        "auto_reconnect_wait": 4000,
+        "auto_reconnect_max_retries": 10
+    },
+    "buffers": {
+        "messageLayout": "compact",
+        "show_emoticons": false,
+        "show_link_previews": false,
+        "inline_link_auto_previews": false
+    }
+}
