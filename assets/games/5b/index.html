@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>￰BFDIA 5b | Takes a bit to load</title>
-  <link id="favicon" rel="icon" href="/assets/img/milkyway.png" type="image/x-icon">
+	<title>5B | Ignore the black screen, game is loading</title>
+	<meta name="description" content="An HTML5 port of the puzzle platformer in the world of Battle for Dream Island."/>
+	<meta charset="utf-8"/>
+	<meta name="author" content="coppersalts">
+	<meta property="og:title" content="HTML5b">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://coppersalts.github.io/HTML5b/">
+	<meta property="og:image" content="https://coppersalts.github.io/HTML5b/visuals/bg/bg0002.png">
+	<meta property="og:description" content="An HTML5 port of Cary Huang's BFDIA 5b.">
+	<meta name="theme-color" content="#c92b20">
+	<meta name="twitter:card" content="summary_large_image">
+    <link id="favicon" rel="icon" href="/assets/img/milkyway.png" type="image/x-icon">
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+	<script type="text/javascript" src="5b.js"></script>
   <script src="/assets/js/cloak.js"></script>
   <script src="/assets/js/escape.js"></script>
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		#center {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+		}
+		canvas {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
 </head>
 <body>
-  <iframe id="innerFrame" name="innerFrame"
-    sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads"
-    frameborder="0" allowfullscreen=""
-    src="/5b"
-    style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
-  </iframe>
+<div id="center">
+	<div id="hide-contenteditable"><canvas id="cnv" contenteditable="false"></canvas></div>
+</div>
 </body>
 </html>
