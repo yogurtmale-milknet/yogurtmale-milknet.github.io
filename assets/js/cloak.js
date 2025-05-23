@@ -1,6 +1,6 @@
 document.addEventListener("keydown", function (event) {
     if (event.key === ".") {
-        let choice = prompt("CLOAK OPTIONS: Google Drive (enter g), Google Classroom (enter gc), Google Docs (enter gd), Clever (enter c), PowerSchool (enter p), Khan Academy (enter k), Desmos (enter d), Schoology (enter s), Cool Math Games (enter cmg)");
+        let choice = prompt("CLOAK OPTIONS: Google Drive (g), Google Classroom (gc), Google Docs (gd), Clever (c), PowerSchool (p), Khan Academy (k), Desmos (d), Schoology (s), Cool Math Games (cmg), IXL (i), i-Ready Reading (ir), i-Ready Math (im)");
 
         const options = {
             g: { title: "My Drive - Google Drive", icon: "/assets/img/drive.ico" },
@@ -12,7 +12,9 @@ document.addEventListener("keydown", function (event) {
             s: { title: "Schoology", icon: "/assets/img/schoology.ico" },
             d: { title: "Desmos | Scientific Calculator", icon: "/assets/img/desmos.ico" },
             cmg: { title: "Cool Math Games - Free Online Games for Learning and Fun", icon: "/assets/img/coolmathgames.ico" },
-            i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" }
+            i: { title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", icon: "/assets/img/ixl.ico" },
+            im: { title: "Math To Do, i-Ready", icon: "/assets/img/iready.ico" },
+            ir: { title: "Reading To Do, i-Ready", icon: "/assets/img/iready.ico" },
         };
 
         if (options[choice]) {
