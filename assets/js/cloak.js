@@ -1,6 +1,6 @@
 document.addEventListener("keydown", function (event) {
     if (event.key === ".") {
-        let choice = prompt("CLOAK OPTIONS: ALEKS (a), Clever (c), Cool Math Games (cl), Desmos (d), Edpuzzle (e), Google (gl), Google Drive (g), Google Classroom (gc), Google Docs (gd), Google Slides (gs), IXL (i), i-Ready Reading (ir), i-Ready Math (im), Khan Academy (k), PowerSchool (p), Schoology (s),");
+        let choice = prompt("CLOAK OPTIONS: ALEKS (a), Clever (c), Cool Math Games (cl), Desmos (d), Edpuzzle (e), Google (gl), Google Drive (g), Google Classroom (gc), Google Docs (gd), Google Slides (gs), IXL (i), i-Ready Reading (ir), i-Ready Math (im), Khan Academy (k), Naviance (n), PowerSchool (p), Schoology (s),");
 
         const options = {
             g: { title: "My Drive - Google Drive", icon: "/assets/img/drive.ico" },
@@ -19,6 +19,7 @@ document.addEventListener("keydown", function (event) {
             gs: { title: "Google Slides", icon: "/assets/img/slides.ico" },
             a: { title: "ALEKS - Home", icon: "/assets/img/aleks.ico" },
             e: { title: "Edpuzzle", icon: "/assets/img/edpuzzle.ico" },
+            n: { title: "Naviance Student", icon: "/assets/img/naviance.ico" },
         };
 
         if (options[choice]) {
