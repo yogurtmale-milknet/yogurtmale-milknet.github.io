@@ -1,5 +1,4 @@
-                                                                                            
-                                                                                                    
+                                                                                                                                                                                               
                                                                                                     
                     ::::::::::::::::                                                                
                   ::::      :::::::::::::                     :                                     
@@ -33,7 +32,7 @@
                                                                :::::::                  ::          
                                                                    :::::::::::      :::::           
                                                                           :::::::::::::             
-                                                                                                                                                                                                                                                                                                                                                                                                                     ca.resources.totalh.net                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                     home.bostoncollege.my-board.org                                                                         
 get.milknet.ct.ws
 account.frontierbroadband.66ghz.com
 milk.everypizza.im
@@ -41,6 +40,6 @@ milkyway.localplayer.dev
 
 This list will change often. Stay up to date at github.com/milkywaynetwork/milkywaynetwork.github.io/blob/main/links.txt
 
-Currently MilkyWay cannot be deployed from one repo since most of the assets are hosted on separate repositories. If you need another link set up, let me know at voxel0@disroot.org. Alternatively I can help you make mirrors but it'd be complicated.
+Currently MilkyWay cannot be deployed from one repo since most of the assets are hosted on separate repositories. An all-in-one revamp that you can deploy is currently in the works.
 
 bit.ly/milkywaygg
