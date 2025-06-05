@@ -32,13 +32,13 @@
                                                                :::::::                  ::          
                                                                    :::::::::::      :::::           
                                                                           :::::::::::::             
-                                                                                                                                                                                                                                                                                                                                                                                                                     h.mw.10001mb.com
+                                                                                                                                                                                                                                                                                                                                                                                                                     Primary: milkyway.fsky.io (faster updates)
+
+Mirrors:
 get.milknet.ct.ws
 account.frontierbroadband.66ghz.com
 milk.everypizza.im
 milkyway.localplayer.dev
-
-This list will change often. Stay up to date at github.com/milkywaynetwork/milkywaynetwork.github.io/blob/main/links.txt
 
 Currently MilkyWay cannot be deployed from one repo since most of the assets are hosted on separate repositories. An all-in-one revamp that you can deploy is currently in the works.
 
