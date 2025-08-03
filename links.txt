@@ -34,8 +34,8 @@
                                                                           :::::::::::::             
                                                                                                                                                                                                                                                                                                                                                                                                                      
 Mirrors:
+comcast.ddns.net
 91021.bnkd.xyz
-allstonedu.myftp.org
 milk.everypizza.im
 milkyway.localplayer.dev
 
