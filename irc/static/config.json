@@ -10,7 +10,7 @@
     ],
     "startupOptions" : {
         "greetingText": "telepath.im IRC",
-        "websocket": "wss://ircws.telepath.im/",
+        "websocket": "wss://web.libera.chat/webirc/websocket/",
         "channel": "#milknet",
         "nick": "milky-?"
     },
