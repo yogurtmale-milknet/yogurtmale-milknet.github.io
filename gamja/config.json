@@ -2,6 +2,6 @@
 	"server": {
 		"url": "ircs://irc.libera.chat:6697",
 		"nick":"milky-*",
-		"autojoin": "#milknet"
+		"autojoin": "#libera"
 	}
 }
