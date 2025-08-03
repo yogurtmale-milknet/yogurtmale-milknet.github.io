@@ -9,9 +9,9 @@
         { "name": "Dark", "url": "static/themes/nightswatch" }
     ],
     "startupOptions" : {
-        "greetingText": "telepath.im IRC",
+        "greetingText": "libera.chat IRC",
         "websocket": "wss://web.libera.chat/webirc/websocket/",
-        "channel": "#milknet",
+        "channel": "#libera",
         "nick": "milky-?"
     },
     "ircFramework": {
